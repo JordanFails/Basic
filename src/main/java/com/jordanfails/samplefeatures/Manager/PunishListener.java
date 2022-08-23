@@ -24,6 +24,7 @@ public class PunishListener implements Listener {
 
                 Faction faction = FactionsManager.getInstance().getPlayerFaction(f[f.length -1]);
                 PlayerFaction playerFaction = (PlayerFaction) faction;
+                String st = "new";
 
                 if(event.getCurrentItem() == null){
                     return;
