@@ -1,0 +1,29 @@
+name: SampleFeatures
+version: '1.0-SNAPSHOT'
+main: com.jordanfails.samplefeatures.SampleFeatures
+api-version: 1.8.9
+depend:
+  - LuckPerms
+  - Lazarus
+  - LunarClientAPI
+commands:
+  adminrevive:
+    description: a neat command for all your admin problems
+    permission: hcf.revive.admin
+  checkdeathban:
+    description: a neat command to check your deathban status
+  checkrank:
+    description: check your current highest rank with check rank
+  delay:
+    description: a cool command to delay chat.
+    permission: hcf.staff.delaychat
+  discord:
+    description: a cool command to show the servers discord. hard cooded :)
+  serverinfo:
+    description: a cool command to show server info
+    permission: hcf.command.serverinfo
+  lunaramount:
+    description: a cool command to show the amount of people on server using Lunar Client :).
+  staffinfo:
+    description: a cool command to show staff information.
+    permission: hcf.command.staffinfo
