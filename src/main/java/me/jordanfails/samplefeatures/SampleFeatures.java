@@ -44,6 +44,7 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new PlayerInfoCommand());
         this.commandFramework.registerCommands(new MuteChatCommand());
         this.commandFramework.registerCommands(new LFACommand());
+        this.commandFramework.registerCommands(new NitroCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
         getCommand("discord").setExecutor(new DiscordCommand());
         getCommand("serverinfo").setExecutor(new InfoCommand());

@@ -1,14 +1,23 @@
 package me.jordanfails.samplefeatures.Commands;
 
-import org.bukkit.command.Command;
+import com.minnymin.command.Command;
+import com.minnymin.command.CommandArgs;
+import me.jordanfails.samplefeatures.Utils.CC;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-public class NitroCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class NitroCommand {
+    @Command(
+            name = "nitro",
+            inGameOnly = false,
+            permission = "hcf.command.nitro",
+            noPerm = "You lack the permissions to execute this command"
+    )
 
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
 
-        return false;
+        player.sendMessage(CC.translate(""));
     }
 }
