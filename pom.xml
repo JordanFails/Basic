@@ -64,12 +64,10 @@
     </repositories>
 
     <dependencies>
-
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.luckperms</groupId>
@@ -85,15 +83,17 @@
             <systemPath>${basedir}/deps/Lazarus.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.gitlab.ruany</groupId>
-            <artifactId>LiteBansAPI</artifactId>
-            <version>0.3.5</version>
+            <groupId>me.activated</groupId>
+            <artifactId>AquaCoreAPI</artifactId>
+            <version>2.6.20</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/deps/CustomSpigot.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-            <scope>compile</scope>
+            <version>1.18.24</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.LunarClient</groupId>
@@ -103,7 +103,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
+            <version>4.4</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -1,13 +1,12 @@
 name: SampleFeatures
 version: '${project.version}'
-main: com.jordanfails.samplefeatures.SampleFeatures
+main: me.jordanfails.samplefeatures.SampleFeatures
 api-version: 1.8.9
 depend:
-  - LuckPerms
   - Lazarus
-  - LunarClientAPI
+  - LunarClient-API
 commands:
-  adminrevive:
+  arevive:
     description: a neat command for all your admin problems
     permission: hcf.revive.admin
   checkdeathban:
@@ -18,12 +17,24 @@ commands:
     description: a cool command to delay chat.
     permission: hcf.staff.delaychat
   discord:
-    description: a cool command to show the servers discord. hard cooded :)
+    description: a cool command to show the servers discord. hard cooded.
+  finfo:
+    description: a cool command to check the information on a faction.
+  fpunish:
+    description: a cool command to punish a whole faction.
+  freerank:
+    description: a cool command to get a free rank.
   serverinfo:
     description: a cool command to show server info
     permission: hcf.command.serverinfo
   lunaramount:
-    description: a cool command to show the amount of people on server using Lunar Client :).
+    description: a cool command to show the amount of people on server using Lunar Client.
   staffinfo:
     description: a cool command to show staff information.
     permission: hcf.command.staffinfo
+  timeline:
+    description: a cool command to check the timeline of other staff members!
+  staffonline:
+    description: a cool command to check online staff!
+  youtube:
+    description: a cool command to check the requirements for youtube rank.
