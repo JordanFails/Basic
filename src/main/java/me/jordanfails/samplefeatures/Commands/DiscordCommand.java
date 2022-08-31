@@ -1,21 +1,21 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.Command;
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.jordanfails.samplefeatures.Utils.Utils;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class DiscordCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class DiscordCommand {
+    @Command(
+            name = "discord",
+            inGameOnly = false
+    )
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
 
-        Player player = (Player) sender;
-
-        player.sendMessage(CC.translate("&d&lDiscord&r  » Join the discord at &d&ndiscord.gg/servername&r!"));
-        player.sendMessage(CC.translate("&rJoining the discord to information and changelogs!"));
-
-        return false;
+        player.sendMessage(CC.translate("&eJoin out discord at:&d discord.gg/servername&e."));
     }
 }

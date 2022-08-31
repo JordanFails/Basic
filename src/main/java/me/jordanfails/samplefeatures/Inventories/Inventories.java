@@ -69,7 +69,7 @@ public class Inventories {
 
 
     public static void lffGUI(Player player){
-        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("Classes"));
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&7Classes"));
 
         inventory.setItem(0, new ItemBuilder(Material.DIAMOND_HELMET).displayName(CC.AquaB + "Diamond").loreLine(CC.GrayI + "Click to select " + CC.Aqua + "Diamond Class").build());
         inventory.setItem(1, new ItemBuilder(Material.IRON_HELMET).displayName(CC.AquaB + "Miner").loreLine(CC.GrayI + "Click to select " + CC.Aqua + "Miner Class").build());
@@ -78,6 +78,17 @@ public class Inventories {
         inventory.setItem(4, new ItemBuilder(Material.CHAINMAIL_HELMET).displayName(CC.RedB + "Rouge").loreLine(CC.GrayI + "Click to select " + CC.Red + "Rouge Class").build());
         inventory.setItem(5, new ItemBuilder(Material.BREWING_STAND_ITEM).displayName(CC.YellowB + "Brewer").loreLine(CC.GrayI + "Click to select " + CC.Yellow + "Brewer Class").build());
         inventory.setItem(8, new ItemBuilder(Material.EMERALD_BLOCK).displayName(CC.GreenB + "Confirm Classes").loreLine(CC.GrayI + "Click to confirm your class choices.").build());
+
+        player.openInventory(inventory);
+
+    }
+
+    public static void redeemGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 3, CC.translate("&7Redeem"));
+
+        inventory.setItem(12, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.AQUA + ChatColor.BOLD.toString() + "SimplyHate").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(13, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Pampa").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner("Pampa").buildSkull());
+        inventory.setItem(14, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Goos").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner("Goos").buildSkull());
 
         player.openInventory(inventory);
 

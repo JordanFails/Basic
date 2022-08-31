@@ -4,7 +4,7 @@ import me.jordanfails.samplefeatures.Inventories.Inventories;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.factions.FactionsManager;
 import me.qiooip.lazarus.factions.type.PlayerFaction;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

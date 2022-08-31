@@ -2,10 +2,7 @@ package me.jordanfails.samplefeatures;
 
 import com.minnymin.command.CommandFramework;
 import me.jordanfails.samplefeatures.Commands.*;
-import me.jordanfails.samplefeatures.Manager.ChatManager;
-import me.jordanfails.samplefeatures.Manager.JoinLeaveManager;
-import me.jordanfails.samplefeatures.Manager.LFFManager;
-import me.jordanfails.samplefeatures.Manager.PunishListener;
+import me.jordanfails.samplefeatures.Manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -21,6 +18,8 @@ public final class SampleFeatures extends JavaPlugin {
     private static SampleFeatures plugin;
 
     public static ArrayList<UUID> staff = new ArrayList<>();
+
+    public static ArrayList<UUID> redeem = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -45,13 +44,14 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new MuteChatCommand());
         this.commandFramework.registerCommands(new LFACommand());
         this.commandFramework.registerCommands(new NitroCommand());
+        this.commandFramework.registerCommands(new RedeemCommand());
+        this.commandFramework.registerCommands(new DiscordCommand());
+        this.commandFramework.registerCommands(new LunarAmountCommand());
+        this.commandFramework.registerCommands(new OnlineStaffCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
-        getCommand("discord").setExecutor(new DiscordCommand());
         getCommand("serverinfo").setExecutor(new InfoCommand());
-        getCommand("lunaramount").setExecutor(new LunarAmountCommand());
         getCommand("staffinfo").setExecutor(new StaffInfoCommand());
         getCommand("timeline").setExecutor(new TimelineCommand());
-        getCommand("staffonline").setExecutor(new OnlineStaffCommand());
         getCommand("youtube").setExecutor(new YouTubeCommand());
     }
 
@@ -62,6 +62,7 @@ public final class SampleFeatures extends JavaPlugin {
         manager.registerEvents(new PunishListener(), this);
         manager.registerEvents(new ChatManager(), this);
         manager.registerEvents(new LFFManager(), this);
+        manager.registerEvents(new RedeemManager(), this);
 
     }
 
