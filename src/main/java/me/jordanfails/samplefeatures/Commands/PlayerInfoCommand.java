@@ -5,6 +5,7 @@ import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Manager.PlayerDataManager;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
+import me.qiooip.lazarus.factions.Faction;
 import me.qiooip.lazarus.factions.FactionsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,6 +26,8 @@ public class PlayerInfoCommand {
 
             Player player = args.getPlayer();
             CommandSender sender = args.getSender();
+            Lazarus laz = Lazarus.getInstance();
+            FactionsManager fm = FactionsManager.getInstance();
 
             if(args.length() == 0){
                 player.sendMessage(" ");
@@ -39,13 +42,14 @@ public class PlayerInfoCommand {
                     player.sendMessage(ChatColor.RED + "You cannot modify an offline player.");
                     return;
                 }
+                    player.sendMessage(" ");
+                    player.sendMessage(CC.translate("&6&lUser:&r " + target.getName()));
+                    player.sendMessage(CC.translate("&6&l* &eBalance: &a$" + Lazarus.getInstance().getEconomyManager().getBalance(target)));
+                    player.sendMessage(CC.translate("&6&l* &eLunar Client: " + Lazarus.getInstance().getLunarClientManager().isOnLunarClient(target.getUniqueId())));
+                    player.sendMessage(CC.translate("&6&l* &eFaction: &cNull"));
+                    player.sendMessage(" ");
+                    player.sendMessage(CC.translate("&7&l&o(!) &7&oIn the future, you can click the faction to get more information!"));
 
-                player.sendMessage(" ");
-                player.sendMessage(CC.translate("&6&lUser:&r " + target.getName()));
-                player.sendMessage(CC.translate("&6&l* &eBalance: &a$" + Lazarus.getInstance().getEconomyManager().getBalance(target)));
-                player.sendMessage(CC.translate("&6&l* &eLunar Client: " + Lazarus.getInstance().getLunarClientManager().isOnLunarClient(target.getUniqueId())));
-                player.sendMessage(" ");
-                player.sendMessage(CC.translate("&7&l&o(!) &7&oIn the future, you can click the faction to get more information!"));
             }
         }
 

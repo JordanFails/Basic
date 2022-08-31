@@ -10,5 +10,8 @@
         <module name="SampleFeatures" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="qLib" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

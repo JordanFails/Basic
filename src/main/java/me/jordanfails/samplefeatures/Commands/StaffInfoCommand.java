@@ -1,5 +1,7 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.Command;
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.jordanfails.samplefeatures.Utils.Utils;
 import me.qiooip.lazarus.Lazarus;
@@ -7,41 +9,44 @@ import me.qiooip.lazarus.factions.Faction;
 import me.qiooip.lazarus.factions.FactionsManager;
 import me.qiooip.lazarus.factions.type.PlayerFaction;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Player;
 
-public class StaffInfoCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class StaffInfoCommand {
+    @Command(
+            name = "staffinfo",
+            permission = "hcf.command.staffinfo",
+            description = "a cool command to check your staff infomation!",
+            inGameOnly = true
+    )
 
-        Player player = (Player) sender;
-        final PlayerFaction fm;
-        int chatSlowed = Lazarus.getInstance().getChatControlHandler().getDelay();
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
+        Lazarus laz = Lazarus.getInstance();
+        int delay = laz.getChatControlHandler().getDelay();
 
-        if(!player.hasPermission("hcf.command.staffinfo")){
-            player.sendMessage(CC.translate("&c&l(!)&c You lack the permissions to execute this command!"));
-        }else{
-            player.sendMessage(ChatColor.DARK_GRAY + ChatColor.STRIKETHROUGH.toString() + "------------------------------");
-            if(Lazarus.getInstance().getVanishManager().isVanished(player)){
-                player.sendMessage(CC.translate("&e[Staff]&r You are currently vanished!"));
-            }else if(!Lazarus.getInstance().getVanishManager().isVanished(player)){
-                player.sendMessage(CC.translate("&e[Staff]&r You are &e&nnot&r currently vanished!"));
-            }
-            if(chatSlowed <= 0){
-                player.sendMessage(CC.translate("&e[Staff]&r Chat is currently &e&nnot&r slowed."));
-            }else if(chatSlowed == 0){
-                player.sendMessage(CC.translate("&e[Staff]&r Chat is currently slowed by &e&n" + chatSlowed + "&e seconds."));
-            }
-            if(Lazarus.getInstance().getChatControlHandler().isMuted()){
-                player.sendMessage(CC.translate("&e[Staff]&r Chat is currently &e&nmuted&e."));
-            }else if(!Lazarus.getInstance().getChatControlHandler().isMuted())
-                player.sendMessage(CC.translate("&e[Staff]&r Chat is &e&nnot&r currently &e&nmuted&e."));
-            FactionsManager.getInstance().getPlayerFaction(player.getUniqueId());
+        player.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "--------------------------------");
+        player.sendMessage(" ");
+        player.sendMessage(CC.translate("&6&lUser:&r " + player.getName()));
+        if(laz.getVanishManager().isVanished(player)){
+            player.sendMessage(CC.translate("&6&l* &eVanish: &aEnabled" ));
+        }else if(!laz.getVanishManager().isVanished(player)){
+            player.sendMessage(CC.translate("&6&l* &eVanish: &cDisabled" ));
+        }
+        if(laz.getStaffChatHandler().isStaffChatEnabled(player)){
+            player.sendMessage(CC.translate("&6&l* &eStaff Chat: &aEnabled"));
+        }else if(!laz.getStaffChatHandler().isStaffChatEnabled(player)){
+            player.sendMessage(CC.translate("&6&l* &eStaff Chat: &cDisabled"));
         }
 
-        return false;
+        if(delay >= 600){
+            player.sendMessage(CC.translate("&6&l* &eChat Delay: &4Error" ));
+        }else{
+            player.sendMessage(CC.translate("&6&l* &eChat Delay: " + laz.getChatControlHandler().getDelay() + " seconds"));
+        }
+        player.sendMessage(" ");
+        player.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "--------------------------------");
     }
 }

@@ -1,6 +1,7 @@
 package me.jordanfails.samplefeatures.Manager;
 
 import me.jordanfails.samplefeatures.SampleFeatures;
+import me.jordanfails.samplefeatures.Utils.CC;
 import me.jordanfails.samplefeatures.Utils.Utils;
 import com.lunarclient.bukkitapi.LunarClientAPI;
 import me.qiooip.lazarus.Lazarus;
@@ -12,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.concurrent.TimeUnit;
+
 public class JoinLeaveManager implements Listener {
 
 
@@ -20,9 +23,11 @@ public class JoinLeaveManager implements Listener {
         Player player = event.getPlayer();
 
 
-        if(LunarClientAPI.getInstance().isRunningLunarClient(player)){
+        if(LunarClientAPI.getInstance().isRunningLunarClient(player.getUniqueId())){
             LunarClientAPI.getInstance().registerPlayer(player);
-        }else{
+            player.sendMessage(CC.Green + "You have been auto-logged as a premium user");
+            return;
+        }else if(!LunarClientAPI.getInstance().isRunningLunarClient(player.getUniqueId())){
             player.sendMessage(Utils.chat("&b&l(!)&r You have not been verified using &b&nLunar Client!"));
             player.sendMessage(Utils.chat("&rUsing &b&nLunar Client&r can boost your overall experience bringing"));
             player.sendMessage(Utils.chat("&rWaypoints, F focus, and &b&nmany&r more!"));

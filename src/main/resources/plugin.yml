@@ -25,9 +25,6 @@ commands:
   serverinfo:
     description: a cool command to show server info
     permission: hcf.command.serverinfo
-  staffinfo:
-    description: a cool command to show staff information.
-    permission: hcf.command.staffinfo
   timeline:
     description: a cool command to check the timeline of other staff members!
   youtube:

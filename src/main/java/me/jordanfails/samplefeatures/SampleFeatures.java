@@ -48,9 +48,10 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new DiscordCommand());
         this.commandFramework.registerCommands(new LunarAmountCommand());
         this.commandFramework.registerCommands(new OnlineStaffCommand());
+        this.commandFramework.registerCommands(new SaleCommand());
+        this.commandFramework.registerCommands(new StaffInfoCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
         getCommand("serverinfo").setExecutor(new InfoCommand());
-        getCommand("staffinfo").setExecutor(new StaffInfoCommand());
         getCommand("timeline").setExecutor(new TimelineCommand());
         getCommand("youtube").setExecutor(new YouTubeCommand());
     }

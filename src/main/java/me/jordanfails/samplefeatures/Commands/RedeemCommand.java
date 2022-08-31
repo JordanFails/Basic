@@ -13,8 +13,6 @@ import java.io.File;
 
 public class RedeemCommand {
 
-    File file = new File(Bukkit.getWorld() + File.separator + World.getName() + File.separator + "playerdata" + File.separator +   Player.getUniqueId());
-
     @Command(
             name = "support",
             usage = "Usage: /support (clear)"
