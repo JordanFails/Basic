@@ -27,5 +27,3 @@ commands:
     permission: hcf.command.serverinfo
   timeline:
     description: a cool command to check the timeline of other staff members!
-  youtube:
-    description: a cool command to check the requirements for youtube rank.

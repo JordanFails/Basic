@@ -3,6 +3,7 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import com.mysql.jdbc.TimeUtil;
+import me.jordanfails.samplefeatures.ConfigurationService;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import me.qiooip.lazarus.timer.Timer;
@@ -26,7 +27,6 @@ public class SaleCommand {
     public void execute(CommandArgs args){
         Player player = (Player) args.getSender();
         CommandSender sender = args.getSender();
-        int percentageoff = Integer.parseInt(args.getArgs(0));
 
         if(args.length() == 0){
             if(!sender.hasPermission("hcf.command.salealert")){
@@ -36,7 +36,8 @@ public class SaleCommand {
                 Bukkit.getServer().broadcastMessage(CC.translate("&7[&4ALERT&7] &a&l&nCONSOLE&r has &a&nactivated&r a sale for &a&n25% OFF&r for &a&n1 day&r!"));
                 Bukkit.getServer().broadcastMessage(CC.translate("&7[&4ALERT&7] &rTake advantage at &a&nhttps://store.samplefeatures.org&r!"));
                 Bukkit.getServer().broadcastMessage(CC.translate(""));
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "sale start STORE 25h");
+                TimerManager.getInstance().getSaleTimer().activate();
+                //TODO: delay = how much time in seconds.
             }
         }else if(args.length() == 1)
             if(args.getArgs(0).equalsIgnoreCase("clear")) {
@@ -44,7 +45,7 @@ public class SaleCommand {
                 Bukkit.getServer().broadcastMessage(CC.translate("&7[&4ALERT&7] &a&l&nCONSOLE&r has &c&ndeactivated&r the current sale."));
                 Bukkit.getServer().broadcastMessage(CC.translate("&7[&4ALERT&7] &rYou can still shop at &a&nhttps://store.samplefeatures.org"));
                 Bukkit.getServer().broadcastMessage(CC.translate(""));
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "sale stop STORE");
+                TimerManager.getInstance().getSaleTimer().disable();
             }
     }
 }

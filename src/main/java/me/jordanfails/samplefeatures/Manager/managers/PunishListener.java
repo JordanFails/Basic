@@ -1,4 +1,4 @@
-package me.jordanfails.samplefeatures.Manager;
+package me.jordanfails.samplefeatures.Manager.managers;
 
 import me.jordanfails.samplefeatures.Inventories.Inventories;
 import me.jordanfails.samplefeatures.Utils.CC;

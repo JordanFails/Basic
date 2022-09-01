@@ -1,4 +1,4 @@
-package me.jordanfails.samplefeatures.Manager;
+package me.jordanfails.samplefeatures.Manager.managers;
 
 import com.minnymin.command.Command;
 import me.jordanfails.samplefeatures.Inventories.Inventories;
@@ -62,4 +62,6 @@ public class RedeemManager implements Listener {
             }
         }
     }
+
+
 }

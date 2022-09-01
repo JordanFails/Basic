@@ -1,25 +1,23 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.Command;
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import org.bukkit.Sound;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StoreCommand implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class StoreCommand {
 
-        if(sender instanceof Player){
-            Player player = (Player) sender;
+    @Command(
+            name = "store",
+            aliases = {"donate", "buy"},
+            inGameOnly = true
+    )
 
-            player.sendMessage(CC.translate("&eYou can purchase ranks at: &dstore.samplefeatures.net&e."));
-            player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 100F, 1F);
-        }else{
-            sender.sendMessage(CC.translate("&eYou can purchase ranks at: &dstore.samplefeatures.net&e."));
-        }
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
 
-        return false;
+        player.sendMessage(CC.translate("&eYou can purchase ranks at: &dstore.samplefeatures.net&e."));
+        player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 100F, 1F);
     }
 }

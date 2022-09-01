@@ -86,7 +86,7 @@ public class Inventories {
     public static void redeemGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 3, CC.translate("&7Redeem"));
 
-        inventory.setItem(12, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.AQUA + ChatColor.BOLD.toString() + "SimplyHate").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(12, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.AQUA + ChatColor.BOLD.toString() + ChatColor.ITALIC.toString() + "SimplyHate").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner(player.getName()).buildSkull());
         inventory.setItem(13, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Pampa").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner("Pampa").buildSkull());
         inventory.setItem(14, new ItemBuilder(Material.SKULL_ITEM).displayName(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Goos").loreLine(CC.White + "Click to support me " + CC.RedB + "\u2764").toSkullBuilder().withOwner("Goos").buildSkull());
 

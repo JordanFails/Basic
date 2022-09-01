@@ -2,14 +2,11 @@ package me.jordanfails.samplefeatures.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
-import me.jordanfails.samplefeatures.Manager.PlayerDataManager;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
-import me.qiooip.lazarus.factions.Faction;
 import me.qiooip.lazarus.factions.FactionsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -36,7 +33,7 @@ public class PlayerInfoCommand {
                 player.sendMessage(CC.translate("&6&l* &eLunar Client: " + Lazarus.getInstance().getLunarClientManager().isOnLunarClient(player.getUniqueId())));
                 player.sendMessage(" ");
                 player.sendMessage(CC.translate("&7&l&o(!) &7&oIn the future, you can click the faction to get more information!"));
-            }else if(args.length() == 1 && player.hasPermission("hcf.playerinfo")){
+            }else if(args.length() == 1){
                 Player target = Bukkit.getPlayer(args.getArgs(0));
                 if (target == null) {
                     player.sendMessage(ChatColor.RED + "You cannot modify an offline player.");
