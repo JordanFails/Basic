@@ -38,5 +38,8 @@ public class ChatManager implements Listener {
             event.setCancelled(true);
             player.sendMessage(CC.translate("&a&l(!)&a This server runs on a custom spigot!"));
         }
+
+        if(chat.contains("/stream")){
+        }
     }
 }

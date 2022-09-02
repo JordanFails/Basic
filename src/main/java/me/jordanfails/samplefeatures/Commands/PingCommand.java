@@ -1,43 +1,43 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.Command;
+import com.minnymin.command.CommandArgs;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class PingCommand implements CommandExecutor {
+public class PingCommand{
+    @Command(
+            name = "ping"
+    )
+    public void execute(CommandArgs args){
+        CommandSender sender = args.getSender();
 
-    @SuppressWarnings("deprecation")
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if ((cmd.getName().equalsIgnoreCase("ping"))) {
-            if (args.length < 1) {
-                if ((sender instanceof Player)) {
-                    CraftPlayer handler = (CraftPlayer) sender;
-                    sender.sendMessage(ChatColor.GRAY + "You have a ping of " + ChatColor.AQUA
-                            + handler.getHandle().playerConnection.player.ping + ChatColor.GRAY + " ms.");
-                } else {
-                    sender.sendMessage(ChatColor.RED + "Correct usage: /ping <player>");
-                }
-            } else {
-                boolean found = false;
-                for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-                    String name = p.getName();
-                    CraftPlayer handler = (CraftPlayer) p;
-                    if (name.equalsIgnoreCase(args[0])) {
-                        sender.sendMessage(ChatColor.AQUA + name + ChatColor.GRAY + " has a ping of " + ChatColor.AQUA
-                                + handler.getHandle().playerConnection.player.ping + ChatColor.GRAY + " ms.");
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    sender.sendMessage(ChatColor.RED + "Player not found.");
+        if(args.length() < 1){
+            if(sender instanceof Player){
+                CraftPlayer handler = (CraftPlayer) sender;
+                String name = sender.getName();
+                sender.sendMessage(ChatColor.LIGHT_PURPLE + name + ChatColor.YELLOW + " has a ping of " + ChatColor.LIGHT_PURPLE + handler.getHandle().playerConnection.player.ping + ChatColor.YELLOW + " ms.");
+            }else{
+                sender.sendMessage(ChatColor.RED + "Correct usage: /ping <player>");
+            }
+        }else{
+            boolean found = false;
+            for(Player player : Bukkit.getServer().getOnlinePlayers()){
+                String name = player.getName();
+                CraftPlayer handler = (CraftPlayer) player;
+                if(name.equalsIgnoreCase(args.getArgs(0))){
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE + name + ChatColor.YELLOW + " has a ping of " + ChatColor.LIGHT_PURPLE + handler.getHandle().playerConnection.player.ping + ChatColor.YELLOW + " ms.");
+                    found = true;
+                    break;
                 }
             }
+            if(!found){
+                sender.sendMessage(ChatColor.RED + "Player not found.");
+            }
         }
-        return true;
+
     }
 }

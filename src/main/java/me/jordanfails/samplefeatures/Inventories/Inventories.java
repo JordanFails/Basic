@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 @Getter
@@ -91,5 +92,13 @@ public class Inventories {
 
         player.openInventory(inventory);
 
+    }
+
+    public static void chatColorGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&7ChatColor"));
+
+        inventory.setItem(0, new ItemBuilder(Material.INK_SACK).data(DyeColor.ORANGE.getData()).displayName(CC.Red + CC.Bold + "Red").enchant(Enchantment.DURABILITY, 10, true).build());
+
+        player.openInventory(inventory);
     }
 }

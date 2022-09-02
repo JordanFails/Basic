@@ -13,17 +13,11 @@ commands:
     description: a neat command to check your deathban status
   checkrank:
     description: check your current highest rank with check rank
-  delay:
-    description: a cool command to delay chat.
-    permission: hcf.staff.delaychat
   finfo:
     description: a cool command to check the information on a faction.
   fpunish:
     description: a cool command to punish a whole faction.
   freerank:
     description: a cool command to get a free rank.
-  serverinfo:
-    description: a cool command to show server info
-    permission: hcf.command.serverinfo
   timeline:
     description: a cool command to check the timeline of other staff members!

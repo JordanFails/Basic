@@ -67,8 +67,12 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new StoreCommand());
         this.commandFramework.registerCommands(new TimelineCommand());
         this.commandFramework.registerCommands(new HatCommand());
+        this.commandFramework.registerCommands(new DelayCommand());
+        this.commandFramework.registerCommands(new InfoCommand());
+        this.commandFramework.registerCommands(new GiveawayCommand());
+        this.commandFramework.registerCommands(new ChatColorCommand());
+        this.commandFramework.registerCommands(new PingCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
-        getCommand("serverinfo").setExecutor(new InfoCommand());
     }
 
     private void registerManagers(){
