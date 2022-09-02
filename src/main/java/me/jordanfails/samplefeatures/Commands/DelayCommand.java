@@ -10,8 +10,7 @@ import org.bukkit.command.CommandSender;
 public class DelayCommand {
     @Command(
             name = "delay",
-            aliases = {"tell", "t", "m", "msg"},
-            usage = "Usage: /message <delayInSeconds>"
+            usage = "Usage: /delay <delayInSeconds>"
     )
     public void execute(CommandArgs args){
         CommandSender sender = args.getSender();
