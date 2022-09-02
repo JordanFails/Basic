@@ -3,16 +3,14 @@ package me.jordanfails.samplefeatures;
 import com.minnymin.command.CommandFramework;
 import lombok.Getter;
 import me.jordanfails.samplefeatures.Commands.*;
-import me.jordanfails.samplefeatures.Manager.managers.*;
+import me.jordanfails.samplefeatures.Manager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Getter
 public final class SampleFeatures extends JavaPlugin {
@@ -30,14 +28,17 @@ public final class SampleFeatures extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        long timeAtStart = System.currentTimeMillis();
-        long timeAtEnd = System.currentTimeMillis();
-        long timeTakenInMS = timeAtEnd - timeAtStart;
         this.commandFramework = new CommandFramework(this);
+        long timeAtStart = System.currentTimeMillis();
         registerCommands();
         registerManagers();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        if(Bukkit.getPluginManager().getPlugin("Lazarus") == null){
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
+        long timeAtEnd = System.currentTimeMillis();
+        long timeTakenInMS = timeAtEnd - timeAtStart;
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[SampleFeatures]" + ChatColor.GREEN + " Plugin loaded in " + timeTakenInMS + "ms.");
     }
     public static SampleFeatures get() {
@@ -47,7 +48,7 @@ public final class SampleFeatures extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        SampleFeatures.plugin = null;
+        plugin = null;
     }
 
     private void registerCommands(){
@@ -65,6 +66,7 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new YouTubeCommand());
         this.commandFramework.registerCommands(new StoreCommand());
         this.commandFramework.registerCommands(new TimelineCommand());
+        this.commandFramework.registerCommands(new HatCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
         getCommand("serverinfo").setExecutor(new InfoCommand());
     }

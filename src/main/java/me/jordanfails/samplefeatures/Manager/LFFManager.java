@@ -1,4 +1,4 @@
-package me.jordanfails.samplefeatures.Manager.managers;
+package me.jordanfails.samplefeatures.Manager;
 
 import com.google.common.collect.ImmutableBiMap;
 import me.jordanfails.samplefeatures.Utils.CC;

@@ -1,5 +1,6 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.jordanfails.samplefeatures.Utils.Utils;
 import net.luckperms.api.LuckPermsProvider;
@@ -37,5 +38,17 @@ public class FreeRankCommand implements CommandExecutor {
         }
 
         return false;
+    }
+
+
+    @com.minnymin.command.Command(
+            name = "freerank",
+            usage = "Usage: /freerank",
+            inGameOnly = true
+    )
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
+
+
     }
 }

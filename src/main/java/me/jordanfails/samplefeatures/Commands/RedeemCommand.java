@@ -3,14 +3,9 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Inventories.Inventories;
-import me.jordanfails.samplefeatures.Manager.managers.RedeemManager;
 import me.jordanfails.samplefeatures.SampleFeatures;
 import me.jordanfails.samplefeatures.Utils.CC;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
-
-import java.io.File;
 
 
 public class RedeemCommand {
