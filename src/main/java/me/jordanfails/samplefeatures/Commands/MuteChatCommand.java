@@ -7,7 +7,6 @@ import me.qiooip.lazarus.Lazarus;
 import me.qiooip.lazarus.handlers.chat.ChatControlHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class MuteChatCommand {
 

@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SampleFeatures" />
-        <module name="qMobSuite" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="qLib" target="1.8" />
+      <module name="qMobSuite" target="1.8" />
+      <module name="qStaff" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

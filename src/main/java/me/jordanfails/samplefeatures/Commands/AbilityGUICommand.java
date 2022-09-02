@@ -3,7 +3,6 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Inventories.Inventories;
-import me.jordanfails.samplefeatures.SampleFeatures;
 import org.bukkit.entity.Player;
 
 public class AbilityGUICommand {

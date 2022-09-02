@@ -1,12 +1,9 @@
 package me.jordanfails.samplefeatures.Manager;
 
-import com.minnymin.command.Command;
-import me.jordanfails.samplefeatures.Inventories.Inventories;
 import me.jordanfails.samplefeatures.SampleFeatures;
 import me.jordanfails.samplefeatures.Utils.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

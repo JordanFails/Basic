@@ -3,7 +3,6 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.jordanfails.samplefeatures.Utils.Utils;
-import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

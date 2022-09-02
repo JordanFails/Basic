@@ -1,5 +1,6 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.Utils;
 import net.minecraft.server.v1_7_R4.MathHelper;
 import net.minecraft.server.v1_7_R4.MinecraftServer;
@@ -26,5 +27,19 @@ public class InfoCommand implements CommandExecutor {
             player.sendMessage(Utils.chat("&eWhitelisted: &c&nFalse"));
         }
         return false;
+    }
+
+    @com.minnymin.command.Command(
+            name = "info",
+            permission = "hcf.command.info"
+    )
+    public void execute(CommandArgs args){
+        Player player = args.getPlayer();
+
+        int online = Bukkit.getServer().getOnlinePlayers().size();
+        int max = Bukkit.getMaxPlayers();
+
+
+
     }
 }

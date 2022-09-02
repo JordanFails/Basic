@@ -5,7 +5,6 @@ import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;

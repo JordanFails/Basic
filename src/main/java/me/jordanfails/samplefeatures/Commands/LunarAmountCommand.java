@@ -4,7 +4,6 @@ import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.Utils;
 import com.lunarclient.bukkitapi.LunarClientAPI;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.Set;

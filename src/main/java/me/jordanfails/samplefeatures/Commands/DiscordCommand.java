@@ -3,10 +3,7 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
-import me.jordanfails.samplefeatures.Utils.Utils;
 import org.bukkit.Sound;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class DiscordCommand {
