@@ -3,7 +3,6 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import com.mysql.jdbc.TimeUtil;
-import me.jordanfails.samplefeatures.ConfigurationService;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import me.qiooip.lazarus.timer.Timer;

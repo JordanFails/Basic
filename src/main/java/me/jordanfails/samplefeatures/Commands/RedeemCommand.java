@@ -12,13 +12,11 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
+
 public class RedeemCommand {
 
     private SampleFeatures plugin;
 
-    public RedeemCommand(SampleFeatures plugin) {
-        this.plugin = plugin;
-    }
     @Command(
             name = "support",
             usage = "Usage: /support (clear)",
@@ -31,7 +29,6 @@ public class RedeemCommand {
 
 
         if(args.length() == 0){
-            if(SampleFeatures.getPlugin(SampleFeatures.class).getManagerHandler().getReclaimManager().hasReclaimed(p))
             Inventories.redeemGUI(player);
         }
 
