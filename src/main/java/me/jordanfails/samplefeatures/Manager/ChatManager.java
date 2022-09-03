@@ -7,10 +7,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
+import java.net.MalformedURLException;
+
 public class ChatManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onChatControl(PlayerCommandPreprocessEvent event){
+    public void onChatControl(PlayerCommandPreprocessEvent event) throws MalformedURLException {
         String chat = event.getMessage();
         Player player = event.getPlayer();
 
@@ -40,6 +42,7 @@ public class ChatManager implements Listener {
         }
 
         if(chat.contains("/stream")){
+
         }
     }
 }

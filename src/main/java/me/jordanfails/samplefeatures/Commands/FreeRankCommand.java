@@ -23,14 +23,13 @@ public class FreeRankCommand implements CommandExecutor {
             ArrayList<UUID> freerank = new ArrayList<>();
             UUID uuid = player.getUniqueId();
 
-            if(!freerank.contains(uuid)) {
+            if(!(freerank.contains(uuid))) {
                 Bukkit.getServer().dispatchCommand(console, "grant " + player.getName() + "owner 7d"); //TODO: replace top rank name.
                 player.sendMessage(Utils.chat("&e&l[FREE RANK]&e Your rank has been updated!"));
                 freerank.add(uuid);
             } else if(freerank.contains(uuid)) {
                 player.sendMessage(CC.prefix('c') + "You already claimed your free rank!");
                 player.sendMessage(CC.translate("&cTry again next season!"));
-
             }
         }else{
             sender.sendMessage(CC.translate("&c&l(!)&c This is a player only command!"));

@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 public class NitroCommand {
     @Command(
             name = "nitro",
-            inGameOnly = false,
             permission = "hcf.command.nitro",
             noPerm = "You lack the permissions to execute this command"
     )

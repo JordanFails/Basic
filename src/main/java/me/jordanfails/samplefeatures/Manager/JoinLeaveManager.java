@@ -21,9 +21,6 @@ public class JoinLeaveManager implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
-        TextComponent component = new TextComponent("https://www.google.com");
-
-
         if(LunarClientAPI.getInstance().isRunningLunarClient(player.getUniqueId())){
             LunarClientAPI.getInstance().registerPlayer(player);
             player.sendMessage(CC.Green + "You have been auto-logged as a premium user");
@@ -44,12 +41,8 @@ public class JoinLeaveManager implements Listener {
             player.sendMessage(" ");
         }
 
-        if(!SampleFeatures.staff.contains(player.getUniqueId()) && player.getName().equals("SimplyHate")){
-            if(Lazarus.getInstance().getVanishManager().isVanished(player) && SampleFeatures.staff.contains(player.getUniqueId())){
-                SampleFeatures.staff.remove(player.getUniqueId());
-            }else if(!Lazarus.getInstance().getVanishManager().isVanished(player)){
-                SampleFeatures.staff.add(player.getUniqueId());
-            }
+        if(!SampleFeatures.staff.contains(player.getUniqueId())) {
+            SampleFeatures.staff.add(player.getUniqueId());
         }
     }
 
@@ -64,8 +57,10 @@ public class JoinLeaveManager implements Listener {
             if(laz.getStaffModeManager().isInStaffMode(player)){
                 laz.getStaffModeManager().disable();
             }
-            if(laz.getVanishManager().isVanished(player)){
-
+            if(vanishManager.isVanished(player)){
+                vanishManager.getAllVanished().remove(player.getUniqueId());
+            }else{
+                return;
             }
         }
 

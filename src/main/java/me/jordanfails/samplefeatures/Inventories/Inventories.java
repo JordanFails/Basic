@@ -12,6 +12,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 @Getter
 public class Inventories {
@@ -100,5 +101,10 @@ public class Inventories {
         inventory.setItem(0, new ItemBuilder(Material.INK_SACK).data(DyeColor.ORANGE.getData()).displayName(CC.Red + CC.Bold + "Red").enchant(Enchantment.DURABILITY, 10, true).build());
 
         player.openInventory(inventory);
+    }
+
+    public static void lootboxGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, InventoryType.DISPENSER, "&7Lootbox");
+
     }
 }

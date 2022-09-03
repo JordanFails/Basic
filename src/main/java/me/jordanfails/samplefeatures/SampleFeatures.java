@@ -4,6 +4,8 @@ import com.minnymin.command.CommandFramework;
 import lombok.Getter;
 import me.jordanfails.samplefeatures.Commands.*;
 import me.jordanfails.samplefeatures.Manager.*;
+import me.jordanfails.samplefeatures.Utils.ConfigurationService;
+import me.qiooip.lazarus.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -21,8 +23,6 @@ public final class SampleFeatures extends JavaPlugin {
 
     public static ArrayList<UUID> staff = new ArrayList<>();
 
-    public static ArrayList<UUID> redeem = new ArrayList<>();
-
 
 
     @Override
@@ -32,14 +32,18 @@ public final class SampleFeatures extends JavaPlugin {
         long timeAtStart = System.currentTimeMillis();
         registerCommands();
         registerManagers();
+        ConfigurationService.setup();
+        ConfigurationService.getConfig().addDefault("redeems.", true);
+        ConfigurationService.getConfig().options().copyDefaults(true);
+        ConfigurationService.save();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        if(Bukkit.getPluginManager().getPlugin("Lazarus") == null){
-            Bukkit.getPluginManager().disablePlugin(this);
-        }
         long timeAtEnd = System.currentTimeMillis();
         long timeTakenInMS = timeAtEnd - timeAtStart;
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[SampleFeatures]" + ChatColor.GREEN + " Plugin loaded in " + timeTakenInMS + "ms.");
+
+
+
     }
     public static SampleFeatures get() {
         return plugin;
@@ -72,6 +76,7 @@ public final class SampleFeatures extends JavaPlugin {
         this.commandFramework.registerCommands(new GiveawayCommand());
         this.commandFramework.registerCommands(new ChatColorCommand());
         this.commandFramework.registerCommands(new PingCommand());
+        this.commandFramework.registerCommands(new SampleFeatureCommand());
         getCommand("arevive").setExecutor(new AdminReviveCommand());
     }
 
