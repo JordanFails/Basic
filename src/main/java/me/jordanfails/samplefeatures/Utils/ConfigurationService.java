@@ -3,46 +3,73 @@ package me.jordanfails.samplefeatures.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
 
 public class ConfigurationService{
 
-    private static File file;
-    private static FileConfiguration customFile;
+    private static File playerData;
+    private static FileConfiguration playerConfig;
+
+    private static File freeRank;
+
+    private static FileConfiguration freeRankConfig;
 
     public static void setup(){
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("SampleFeatures").getDataFolder(), "playerdata.yml");
+        playerData = new File(Bukkit.getServer().getPluginManager().getPlugin("SampleFeatures").getDataFolder(), "playerdata.yml");
+        freeRank = new File(Bukkit.getServer().getPluginManager().getPlugin("SampleFeatures").getDataFolder(), "freerank.yml");
 
-        if(!file.exists()){
+        if(!freeRank.exists()) {
             try{
-                file.createNewFile();
+                freeRank.createNewFile();
+
             }catch (IOException e){
-                //idk bite me
+                //IDK bite me
+            }
+        }
+
+        if(!playerData.exists()){
+            try{
+                playerData.createNewFile();
+            }catch (IOException e){
+                //IDK bite me
             }
 
         }
 
-        customFile = YamlConfiguration.loadConfiguration(file);
+        playerConfig = YamlConfiguration.loadConfiguration(playerData);
+        freeRankConfig = YamlConfiguration.loadConfiguration(freeRank);
 
 
     }
 
-    public static FileConfiguration getConfig() {
-        return customFile;
+    public static FileConfiguration getPlayerConfig() {
+        return playerConfig;
+    }
+
+    public static FileConfiguration getFreeRankConfig(){
+        return freeRankConfig;
     }
 
     public static void save() {
         try{
-            customFile.save(file);
+            playerConfig.save(playerData);
+        }catch (IOException e){
+            System.out.println("couldnt save the file.");
+        }
+
+        try{
+            freeRankConfig.save(freeRank);
         }catch (IOException e){
             System.out.println("couldnt save the file.");
         }
     }
 
     public static void reload() {
-        customFile = YamlConfiguration.loadConfiguration(file);
+        playerConfig = YamlConfiguration.loadConfiguration(playerData);
+        freeRankConfig = YamlConfiguration.loadConfiguration(freeRank);
     }
 
 }

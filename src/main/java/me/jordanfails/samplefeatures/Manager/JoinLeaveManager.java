@@ -2,11 +2,10 @@ package me.jordanfails.samplefeatures.Manager;
 
 import me.jordanfails.samplefeatures.SampleFeatures;
 import me.jordanfails.samplefeatures.Utils.CC;
-import me.jordanfails.samplefeatures.Utils.Utils;
 import com.lunarclient.bukkitapi.LunarClientAPI;
 import me.qiooip.lazarus.Lazarus;
+import me.qiooip.lazarus.lunarclient.LunarClientManager;
 import me.qiooip.lazarus.staffmode.VanishManager;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,12 +19,11 @@ public class JoinLeaveManager implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
-
-        if(LunarClientAPI.getInstance().isRunningLunarClient(player.getUniqueId())){
+        if(Lazarus.getInstance().getLunarClientManager().isOnLunarClient(player.getUniqueId())){
             LunarClientAPI.getInstance().registerPlayer(player);
-            player.sendMessage(CC.Green + "You have been auto-logged as a premium user");
+            player.sendMessage(CC.Green + "You have been auto-logged as a premium user.");
             return;
-        }else if(!LunarClientAPI.getInstance().isRunningLunarClient(player.getUniqueId())){
+        }else if(!Lazarus.getInstance().getLunarClientManager().isOnLunarClient(player.getUniqueId())){
             player.sendMessage(" ");
             player.sendMessage(" ");
             player.sendMessage(" ");
@@ -44,6 +42,19 @@ public class JoinLeaveManager implements Listener {
         if(!SampleFeatures.staff.contains(player.getUniqueId())) {
             SampleFeatures.staff.add(player.getUniqueId());
         }
+
+        player.sendMessage(CC.translate("&7&m-----------------------------"));
+        player.sendMessage(CC.translate("&rWelcome to the &a&lSampleFeature Network&r!"));
+        player.sendMessage(" ");
+        player.sendMessage(CC.translate("&a&l*&r Faction Size:&7 www.samplefeatures.org"));
+        player.sendMessage(CC.translate("&a&l*&r Map Kit:&7 www.samplefeatures.org"));
+        player.sendMessage(CC.translate("&a&l*&r Teamspeak:&7 www.samplefeatures.org"));
+        player.sendMessage(CC.translate("&a&l*&r Discord:&7 www.samplefeatures.org"));
+        player.sendMessage(CC.translate("&a&l*&r Double Points:&a Enabled"));
+        player.sendMessage(CC.translate("&a&l*&r Blocking Up:&a Enabled"));
+        player.sendMessage(CC.translate("&7&m-----------------------------"));
+        player.sendMessage(" ");
+
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -51,6 +62,7 @@ public class JoinLeaveManager implements Listener {
         Player player = event.getPlayer();
         Lazarus laz = Lazarus.getInstance();
         VanishManager vanishManager = Lazarus.getInstance().getVanishManager();
+        LunarClientManager lunarClientManager = Lazarus.getInstance().getLunarClientManager();
 
         if(player.hasPermission("hcf.staffonline") || player.isOp() && SampleFeatures.staff.contains(player.getUniqueId())){
             SampleFeatures.staff.remove(player.getUniqueId());
@@ -62,6 +74,10 @@ public class JoinLeaveManager implements Listener {
             }else{
                 return;
             }
+        }
+
+        if(lunarClientManager.isOnLunarClient(player)){
+            LunarClientAPI.getInstance().unregisterPlayer(player, true);
         }
 
     }

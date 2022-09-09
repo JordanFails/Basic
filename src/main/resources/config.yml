@@ -1,0 +1,23 @@
+#only integers!!
+SALETIMER: 84600
+freerank: true
+craft:
+  lore:
+    - '&rRight-click to claim the Crafting Perk!'
+    - ' '
+    - '&a&lREADY TO CLAIM'
+fly:
+  lore:
+    - '&rRight-click to claim the Fly Perk!'
+    - ' '
+    - '&a&lREADY TO CLAIM'
+package:
+  lore:
+    - ' '
+    - '&7Click to open a partner package.'
+    - '&7'
+timer:
+  lore:
+    - ' '
+    - '&7Click to open a partner package.'
+    - '&7'

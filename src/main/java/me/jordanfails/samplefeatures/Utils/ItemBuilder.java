@@ -56,7 +56,7 @@ public class ItemBuilder {
         if (this.meta == null) {
             this.meta = this.stack.getItemMeta();
         }
-        this.meta.setLore((List) Arrays.asList(lore));
+        this.meta.setLore(Arrays.asList(lore));
         return this;
     }
 

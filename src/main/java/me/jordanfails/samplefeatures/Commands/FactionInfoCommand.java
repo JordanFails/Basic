@@ -13,7 +13,7 @@ public class FactionInfoCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         final PlayerFaction pf;
-        String faction = FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).toString();
+        String faction = FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName();
         double dtr = FactionsManager.getInstance().getPlayerFaction(player).getDtr();
         double maxDTR = FactionsManager.getInstance().getPlayerFaction(player).getMaxDtr();
         int amountOnline = FactionsManager.getInstance().getPlayerFaction(player).getOnlineMemberCount();

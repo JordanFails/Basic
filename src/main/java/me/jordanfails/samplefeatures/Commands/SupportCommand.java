@@ -5,11 +5,10 @@ import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Inventories.Inventories;
 import me.jordanfails.samplefeatures.SampleFeatures;
 import me.jordanfails.samplefeatures.Utils.CC;
-import me.jordanfails.samplefeatures.Utils.ConfigurationService;
 import org.bukkit.entity.Player;
 
 
-public class RedeemCommand {
+public class SupportCommand {
 
     private SampleFeatures plugin;
 
@@ -25,15 +24,7 @@ public class RedeemCommand {
 
 
         if(args.length() == 0){
-            if(!ConfigurationService.getConfig().contains(player.getName())){
-                String uuid = String.valueOf(player.getUniqueId());
-                ConfigurationService.getConfig().set("redeems." + uuid, Integer.parseInt("1"));
-                Inventories.redeemGUI(player);
-                return;
-            }else if(ConfigurationService.getConfig().contains("nicknames." + player.getUniqueId().toString() + Integer.parseInt("1"))){
-                player.sendMessage("You cannot redeem");
-                return;
-            }
+            Inventories.redeemGUI(player);
         }
 
         if(args.length() == 1){

@@ -2,6 +2,9 @@ package me.jordanfails.samplefeatures.Utils;
 
 import org.bukkit.ChatColor;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CC {
     public static final String Black;
     public static final String BlackB;
@@ -166,6 +169,10 @@ public class CC {
         Go = GreenB + "(!) " + Green;
         Wait = YellowB + "(!) " + Yellow;
         Stop = RedB + "(!) " + Red;
+    }
+
+    public static List<String> list(List<String> s){
+        return s.stream().map(CC::translate).collect(Collectors.toList());
     }
 }
 

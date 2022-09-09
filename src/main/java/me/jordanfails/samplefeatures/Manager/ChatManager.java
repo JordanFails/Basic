@@ -1,18 +1,18 @@
 package me.jordanfails.samplefeatures.Manager;
 
 import me.jordanfails.samplefeatures.Utils.CC;
+import me.qiooip.lazarus.Lazarus;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import java.net.MalformedURLException;
-
 public class ChatManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onChatControl(PlayerCommandPreprocessEvent event) throws MalformedURLException {
+    public void onChatControl(PlayerCommandPreprocessEvent event){
         String chat = event.getMessage();
         Player player = event.getPlayer();
 
@@ -26,7 +26,7 @@ public class ChatManager implements Listener {
             player.sendMessage(CC.translate("&c&l(!)&c The command &c&n/pl&c is currently disabled!"));
         }
 
-        if(chat.contains("/reload") && !player.hasPermission("hcf.reboot")){
+        if(chat.contains("/reload") && !player.isOp()){
             event.setCancelled(true);
             player.sendMessage(CC.translate("&c&l(!)&c The command &c&n/reload&c is currently disabled!"));
         }
@@ -41,8 +41,15 @@ public class ChatManager implements Listener {
             player.sendMessage(CC.translate("&a&l(!)&a This server runs on a custom spigot!"));
         }
 
-        if(chat.contains("/stream")){
+        if(chat.contains("/fly") && !Lazarus.getInstance().getSotwHandler().isActive()){
+            event.setCancelled(true);
+            player.sendMessage(CC.translate("&a&l[SOTW]&a Fly is not available after SOTW is finished."));
+        }
 
+        if(chat.contains("/sotw end")){
+            event.setCancelled(true);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "sotw stop");
         }
     }
+
 }

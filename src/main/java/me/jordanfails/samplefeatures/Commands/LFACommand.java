@@ -5,6 +5,7 @@ import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Inventories.Inventories;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
+import me.qiooip.lazarus.config.Config;
 import me.qiooip.lazarus.factions.FactionsManager;
 import org.bukkit.entity.Player;
 

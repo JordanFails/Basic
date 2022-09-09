@@ -75,7 +75,12 @@
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>
@@ -91,10 +96,24 @@
         </dependency>
         <dependency>
             <groupId>me.activated</groupId>
-            <artifactId>AquaCoreAPI</artifactId>
+            <artifactId>Spigot</artifactId>
             <version>2.6.20</version>
             <scope>system</scope>
             <systemPath>${basedir}/deps/CustomSpigot.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.activated</groupId>
+            <artifactId>AquaCoreAPI</artifactId>
+            <version>2.6.20</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/deps/AquaCoreAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.activated</groupId>
+            <artifactId>Fanciul</artifactId>
+            <version>2.6.20</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/deps/fanciful.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -122,6 +141,11 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
             <version>3.12.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.BanManagement.BanManager</groupId>
+            <artifactId>BanManagerBukkit</artifactId>
+            <version>v7.7.0</version>
         </dependency>
     </dependencies>
 </project>

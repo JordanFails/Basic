@@ -2,7 +2,7 @@ package me.jordanfails.samplefeatures.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
-import me.jordanfails.samplefeatures.Utils.Utils;
+import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -27,7 +27,7 @@ public class DelayCommand {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException nfe) {
-            sender.sendMessage(Utils.chat("&c&l(!)&c Only integers can be used to slow chat!"));
+            sender.sendMessage(CC.translate("&c&l(!)&c Only integers can be used to slow chat!"));
             return false;
         }
         return true;

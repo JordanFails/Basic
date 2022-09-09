@@ -3,16 +3,11 @@ package me.jordanfails.samplefeatures.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
-import me.jordanfails.samplefeatures.Utils.Utils;
-import net.minecraft.server.v1_7_R4.MathHelper;
-import net.minecraft.server.v1_7_R4.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import static net.minecraft.server.v1_7_R4.MinecraftServer.currentTick;
 
 public class InfoCommand{
 

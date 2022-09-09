@@ -1,5 +1,6 @@
 package me.jordanfails.samplefeatures.Commands;
 
+import com.minnymin.command.CommandArgs;
 import me.jordanfails.samplefeatures.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import org.bukkit.Bukkit;

@@ -1,6 +1,7 @@
 name: SampleFeatures
 version: '1.0-SNAPSHOT'
 main: me.jordanfails.samplefeatures.SampleFeatures
+author: JordanFails
 api-version: 1.8.9
 depend:
   - Lazarus
@@ -17,7 +18,5 @@ commands:
     description: a cool command to check the information on a faction.
   fpunish:
     description: a cool command to punish a whole faction.
-  freerank:
-    description: a cool command to get a free rank.
   timeline:
     description: a cool command to check the timeline of other staff members!
