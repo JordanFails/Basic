@@ -1,6 +1,6 @@
 #only integers!!
 SALETIMER: 84600
-freerank: true
+FREERANK: true
 craft:
   lore:
     - '&rRight-click to claim the Crafting Perk!'

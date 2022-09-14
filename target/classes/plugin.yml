@@ -1,6 +1,6 @@
-name: SampleFeatures
+name: Basic
 version: '1.0-SNAPSHOT'
-main: me.jordanfails.samplefeatures.SampleFeatures
+main: me.jordanfails.basic.Basic
 author: JordanFails
 api-version: 1.8.9
 depend:
