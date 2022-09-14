@@ -2,6 +2,7 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.qiooip.lazarus.config.Language;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,6 +18,7 @@ public class PunishmentWipeCommand {
         Player player = args.getPlayer();
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "liteban reset-database");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "liteban reset-database confirm server:global");
+        player.sendMessage(Language.YES_PLACEHOLDER);
 
 
     }
