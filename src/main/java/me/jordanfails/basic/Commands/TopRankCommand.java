@@ -15,7 +15,7 @@ public class TopRankCommand {
     public void execute(CommandArgs args){
         CommandSender sender = args.getSender();
 
-        sender.sendMessage(CC.translate("&aInterested in purchasing the &2High Roller&a rank? Head over to"));
-        sender.sendMessage(CC.translate("&b&nsamplefeatures.org&a."));
+        sender.sendMessage(CC.translate("&eInterested in purchasing the &6Top Rank&e rank? Head over to"));
+        sender.sendMessage(CC.translate("&6&nsamplefeatures.org&e."));
     }
 }

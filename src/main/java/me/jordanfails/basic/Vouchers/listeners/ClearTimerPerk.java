@@ -4,11 +4,6 @@ import me.jordanfails.basic.Utils.CC;
 import me.jordanfails.basic.Vouchers.Vouchers;
 import me.qiooip.lazarus.abilities.AbilityType;
 import me.qiooip.lazarus.timer.TimerManager;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.cacheddata.CachedPermissionData;
-import net.luckperms.api.model.user.User;
-import net.luckperms.api.util.Tristate;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -20,24 +15,10 @@ import org.bukkit.inventory.ItemStack;
 public class ClearTimerPerk implements Listener {
     private Vouchers item = Vouchers.TIMER;
 
-    public static boolean hasPermission(User user, String permission) {
-        return user.getCachedData().getPermissionData().checkPermission(permission).asBoolean();
-    }
-
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
 
         Player player = e.getPlayer();
-
-        User user1 = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId());
-
-        LuckPerms luckPerms = LuckPermsProvider.get();
-
-
-        assert user1 != null;
-        CachedPermissionData permissionData = user1.getCachedData().getPermissionData();
-
-        Tristate checkResults = permissionData.checkPermission("lazarus.craft");
 
 
         if (!e.getAction().name().contains("RIGHT")) return;

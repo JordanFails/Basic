@@ -80,6 +80,8 @@ public class CC {
     public static final String Wait;
     public static final String Stop;
 
+    public static final String SERVER_NAME = "Sample Features";
+
     public CC() {
     }
 
@@ -174,5 +176,7 @@ public class CC {
     public static List<String> list(List<String> s){
         return s.stream().map(CC::translate).collect(Collectors.toList());
     }
+
+
 }
 

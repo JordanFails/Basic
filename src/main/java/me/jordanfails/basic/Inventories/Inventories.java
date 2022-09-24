@@ -1,5 +1,7 @@
 package me.jordanfails.basic.Inventories;
 
+import me.activated.core.api.rank.RankData;
+import me.activated.core.plugin.AquaCoreAPI;
 import me.jordanfails.basic.Basic;
 import me.jordanfails.basic.Utils.CC;
 import me.jordanfails.basic.Utils.ItemBuilder;
@@ -7,9 +9,6 @@ import lombok.Getter;
 import me.qiooip.lazarus.Lazarus;
 import me.qiooip.lazarus.factions.FactionsManager;
 import me.qiooip.lazarus.factions.type.PlayerFaction;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -138,11 +137,8 @@ public class Inventories {
     //DEFAULT /PROFILE
     public static void profileGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8Your Profile"));
-
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
         FactionsManager factionsManager = FactionsManager.getInstance();
         String factionName = factionsManager.getPlayerFaction(player.getUniqueId()).getName();
         String factionOutput = factionName.substring(0, 1).toUpperCase() + factionName.substring(1);
@@ -150,7 +146,7 @@ public class Inventories {
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
         inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your factions."), " ", CC.translate("&6&l»&r Faction Name: &6" + factionOutput ), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications."), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());          //Online (FactionSize)
 
@@ -161,17 +157,15 @@ public class Inventories {
     public static void statsGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Statistics"));
 
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
         FactionsManager factionsManager = FactionsManager.getInstance();
         String factionName = factionsManager.getPlayerFaction(player.getUniqueId()).getName();
         String factionOutput = factionName.substring(0, 1).toUpperCase() + factionName.substring(1);
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
         inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your factions."), " ", CC.translate("&6&l»&r Faction Name: &6" + factionOutput ), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications."), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());          //Online (FactionSize)
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -200,14 +194,12 @@ public class Inventories {
     public static void socialMedia(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Social Media"));
 
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());
         inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" +FactionsManager.getInstance().getPlayerFaction(player).getName() ), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -234,14 +226,12 @@ public class Inventories {
 
     public static void factionGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Your friends - 1/1"));
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(10, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -271,10 +261,8 @@ public class Inventories {
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Your Public Profile"));
 
         UUID uuid = player.getUniqueId();
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String prefixOutput = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(uuid).getHighestRank(true);
         String factionName = FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName();
         String factionNameOutput = factionName.substring(0, 1).toUpperCase() + factionName.substring(1);
         boolean isOnLunar = Lazarus.getInstance().getLunarClientManager().isOnLunarClient(player.getUniqueId());
@@ -283,7 +271,7 @@ public class Inventories {
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + prefixOutput ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(10, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -295,7 +283,7 @@ public class Inventories {
         inventory.setItem(16, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(17, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(29, new ItemBuilder(Material.SLIME_BALL, 1).displayName(CC.translate("&6&lBalance")).lore(" ", CC.translate("&6&l»&r Current Balance: &6$" + Lazarus.getInstance().getEconomyManager().getBalance(player)), " ").build());
-        inventory.setItem(31, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lPlayer Information")).lore(" ", CC.translate("&6&l»&r Name: &6" + player.getDisplayName()), CC.translate("&6&l»&r Rank: &6" + prefixOutput ), CC.translate("&6&l»&r Lunar Client: &6" + lunarOutput), " ").toSkullBuilder().withOwner(player.getName()).buildSkull());
+        inventory.setItem(31, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lPlayer Information")).lore(" ", CC.translate("&6&l»&r Name: &6" + player.getDisplayName()), CC.translate("&6&l»&r Rank: &6" + rank ), CC.translate("&6&l»&r Lunar Client: &6" + lunarOutput), " ").toSkullBuilder().withOwner(player.getName()).buildSkull());
         inventory.setItem(33, new ItemBuilder(Material.NAME_TAG, 1).displayName(CC.translate("&6&lFaction Information")).lore(" ", CC.translate("&6&l»&r Faction Name: &6" + factionNameOutput), CC.translate("&6&l»&r Points:&6 " + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getPoints()), CC.translate("&6&l»&r DTR:&6 " + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getDtr() + "/" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMaxDtr()), " ", CC.translate("&aClick to view more about your faction!")).build());
         inventory.setItem(45, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(46, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -311,14 +299,12 @@ public class Inventories {
 
     public static void notifyGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Notifications"));
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(10, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -345,14 +331,12 @@ public class Inventories {
 
     public static void notificationsGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9 * 6, CC.translate("&8Notifications"));
-        LuckPerms luckPerms = LuckPermsProvider.get();
-        User user = luckPerms.getPlayerAdapter(Player.class).getUser(player);
-        String prefix = user.getPrimaryGroup();
-        String output = prefix.substring(0, 1).toUpperCase() + prefix.substring(1);
+        AquaCoreAPI api = AquaCoreAPI.INSTANCE;
+        RankData rank = api.getPlayerData(player.getUniqueId()).getHighestRank(true);
 
         inventory.setItem(0, new ItemBuilder(Material.PAPER, 1).displayName(CC.translate("&6&lStatistics")).lore(CC.translate("&7View your statistics across all servers."), " ", CC.translate("&6&l»&r Global Kills: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getKills()), CC.translate("&6&l»&r Global Deaths: &6" + Lazarus.getInstance().getUserdataManager().getUserdata(player.getUniqueId()).getDeaths()), CC.translate(" "), CC.translate("&aClick to view all your statistics")).build());
         inventory.setItem(2, new ItemBuilder(Material.PAINTING, 1).displayName(CC.translate("&6&lSocial Media")).lore(CC.translate("&7Release your social media to the public."), " ", CC.translate("&6&l»&r Social Media Connected: &60/1"), " ", CC.translate("&aClick to view all your social media")).build());
-        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + output ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
+        inventory.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1).displayName(CC.translate("&6&lYour Profile")).lore(CC.translate("&7Manage your profile in a simple system."), " ", CC.translate("&6&l»&r Rank: " + rank ), CC.translate("&6&l»&r VIP Status:&6 N/A"), " ", CC.translate("&aClick to view all your statistics")).toSkullBuilder().withOwner(player.getName()).buildSkull());        inventory.setItem(6, new ItemBuilder(Material.EYE_OF_ENDER, 1).displayName(CC.translate("&6&lFaction")).lore(CC.translate("&7Manage your faction."), " ", CC.translate("&6&l»&r Faction Name: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getName()), CC.translate("&6&l»&r Faction Size: &6" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getOnlineMemberCount() + " &7(" + FactionsManager.getInstance().getPlayerFaction(player.getUniqueId()).getMembers().size() + "&7)"), " ", CC.translate("&aClick to view all your faction stats")).build());        inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(8, new ItemBuilder(Material.WATCH).displayName(CC.translate("&6&lNotifications")).lore(CC.translate("&7View all of your pending notifications"), " ", CC.translate("&6&l»&r Unread Notifications: &60"), " ", CC.translate("&aClick to view all your notifications")).build());
         inventory.setItem(9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
         inventory.setItem(10, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).data(DyeColor.WHITE.getData()).displayName(" ").build());
@@ -386,6 +370,26 @@ public class Inventories {
 
         player.openInventory(inventory);
     }
+
+    public static void youtubeGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8YouTube Requirements"));
+
+        inventory.setItem(4, new ItemBuilder(Material.REDSTONE_TORCH_ON).displayName(CC.translate("&c&lYouTube Requirements")).lore(CC.translate("&c&l»&r Sub Requirements:&r 200"), CC.translate("&c&l»&r View Requirements:&r 100"), " ", CC.translate("&aMessage a staff member to apply.")).enchant(Enchantment.SILK_TOUCH, 10, true).build());
+
+        player.openInventory(inventory);
+    }
+
+    public static void pronouns(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8Select a Pronoun"));
+
+        inventory.setItem(3, new ItemBuilder(Material.NETHER_STAR, 1).displayName(CC.translate("&b&lHe/Him/His")).enchant(Enchantment.DURABILITY, 10, true).build());
+        inventory.setItem(4, new ItemBuilder(Material.NETHER_STAR, 1).displayName(CC.translate("&d&lShe/Her/Hers")).enchant(Enchantment.DURABILITY, 10, true).build());
+        inventory.setItem(5, new ItemBuilder(Material.NETHER_STAR, 1).displayName(CC.translate("&e&lThey/Them/Theirs")).enchant(Enchantment.DURABILITY, 10, true).build());
+
+        player.openInventory(inventory);
+
+    }
+
 
 
 }

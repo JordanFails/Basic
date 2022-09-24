@@ -2,23 +2,22 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.jordanfails.basic.Inventories.Inventories;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 
 public class YouTubeCommand{
 
     @Command(
-            name = "youtube"
+            name = "youtube",
+            inGameOnly = true
 
     )
     public void execute(CommandArgs args){
-        CommandSender sender = args.getSender();
+        Player player = args.getPlayer();
 
-        sender.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "--------------------------------");
-        sender.sendMessage(ChatColor.LIGHT_PURPLE + "YouTube Rank Requirements:");
-        sender.sendMessage(ChatColor.WHITE + "Sub Requirement" + ChatColor.LIGHT_PURPLE + " » " + ChatColor.WHITE + ChatColor.UNDERLINE + "200");
-        sender.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + ChatColor.GOLD + "View Requirement" +" » " + ChatColor.WHITE + "100");
-        sender.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "--------------------------------");
+        Inventories.youtubeGUI(player);
     }
 }

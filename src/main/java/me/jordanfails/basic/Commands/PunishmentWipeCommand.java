@@ -2,10 +2,15 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.activated.core.api.player.PlayerData;
+import me.activated.core.plugin.AquaCore;
+import me.activated.core.plugin.AquaCoreAPI;
 import me.qiooip.lazarus.config.Language;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class PunishmentWipeCommand {
     @Command(
@@ -14,11 +19,10 @@ public class PunishmentWipeCommand {
     )
 
     public void execute(CommandArgs args){
-        CommandSender sender = args.getSender();
+
         Player player = args.getPlayer();
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "liteban reset-database");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "liteban reset-database confirm server:global");
-        player.sendMessage(Language.YES_PLACEHOLDER);
+        UUID uuid = player.getUniqueId();
+
 
 
     }

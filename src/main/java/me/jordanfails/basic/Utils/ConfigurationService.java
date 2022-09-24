@@ -16,9 +16,15 @@ public class ConfigurationService{
 
     private static FileConfiguration freeRankConfig;
 
+    private static File pronouns;
+
+    private static FileConfiguration pronounsConfig;
+
+
     public static void setup(){
         playerData = new File(Bukkit.getServer().getPluginManager().getPlugin("Basic").getDataFolder(), "playerdata.yml");
         freeRank = new File(Bukkit.getServer().getPluginManager().getPlugin("Basic").getDataFolder(), "freerank.yml");
+        pronouns = new File(Bukkit.getServer().getPluginManager().getPlugin("Basic").getDataFolder(), "pronouns.yml");
 
         if(!freeRank.exists()) {
             try{
@@ -38,8 +44,17 @@ public class ConfigurationService{
 
         }
 
+        if(!pronouns.exists()){
+            try {
+                pronouns.createNewFile();
+            }catch (IOException e){
+                //IDK bite me
+            }
+        }
+
         playerConfig = YamlConfiguration.loadConfiguration(playerData);
         freeRankConfig = YamlConfiguration.loadConfiguration(freeRank);
+        pronounsConfig = YamlConfiguration.loadConfiguration(pronouns);
 
 
     }
@@ -52,23 +67,34 @@ public class ConfigurationService{
         return freeRankConfig;
     }
 
+    public static FileConfiguration getPronounsConfig() {
+        return pronounsConfig;
+    }
+
     public static void save() {
         try{
             playerConfig.save(playerData);
         }catch (IOException e){
-            System.out.println("couldnt save the file.");
+            System.out.println("Couldn't save PlayerData File!");
         }
 
         try{
             freeRankConfig.save(freeRank);
         }catch (IOException e){
-            System.out.println("couldnt save the file.");
+            System.out.println("Couldn't save FreeRank File!");
+        }
+
+        try{
+            pronounsConfig.save(pronouns);
+        }catch (IOException e){
+            System.out.println("Couldn't save Pronouns File!");
         }
     }
 
     public static void reload() {
         playerConfig = YamlConfiguration.loadConfiguration(playerData);
         freeRankConfig = YamlConfiguration.loadConfiguration(freeRank);
+        pronounsConfig = YamlConfiguration.loadConfiguration(pronouns);
     }
 
 }

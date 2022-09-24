@@ -2,6 +2,9 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.activated.core.managers.server.ChatManagement;
+import me.activated.core.plugin.AquaCore;
+import me.activated.core.plugin.AquaCoreAPI;
 import me.jordanfails.basic.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import me.qiooip.lazarus.handlers.chat.ChatControlHandler;
@@ -17,16 +20,16 @@ public class MuteChatCommand {
 
     )
     public void execute(CommandArgs args) {
-        ChatControlHandler chatHandler = Lazarus.getInstance().getChatControlHandler();
+        ChatManagement chatManagement = AquaCore.INSTANCE.getChatManagement();
         CommandSender player = args.getSender();
         if (args.length() == 0) {
-            if (chatHandler.isMuted()) {
-                chatHandler.setMuted(false);
+            if (chatManagement.isMuted()) {
+                chatManagement.setMuted(false);
                 Bukkit.getConsoleSender().sendMessage(CC.translate("&a&n" + player.getName() + "&r has unmuted chat."));
                 Bukkit.getServer().broadcastMessage(CC.translate("&a&l(!)&a Global chat has been unmuted."));
                 player.sendMessage(CC.translate("&a&l(!)&a Chat has been successfully &r&nunmuted&a!"));
-            } else if (!chatHandler.isMuted()) {
-                chatHandler.setMuted(true);
+            } else if (!chatManagement.isMuted()) {
+                chatManagement.setMuted(true);
                 Bukkit.getConsoleSender().sendMessage(CC.translate("&a&n" + player.getName() + "&r has muted chat."));
                 Bukkit.getServer().broadcastMessage(CC.translate("&a&l(!)&a Global chat has been muted."));
                 player.sendMessage(CC.translate("&a&l(!)&a Chat has been successfully &r&nmuted&a!"));

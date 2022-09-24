@@ -3,13 +3,12 @@ version: '1.0-SNAPSHOT'
 main: me.jordanfails.basic.Basic
 author: JordanFails
 api-version: 1.8.9
+loadbefore:
+  - Lazarus
 depend:
   - Lazarus
   - LunarClient-API
 commands:
-  arevive:
-    description: a neat command for all your admin problems
-    permission: hcf.revive.admin
   checkdeathban:
     description: a neat command to check your deathban status
   checkrank:
@@ -18,5 +17,3 @@ commands:
     description: a cool command to check the information on a faction.
   fpunish:
     description: a cool command to punish a whole faction.
-  timeline:
-    description: a cool command to check the timeline of other staff members!

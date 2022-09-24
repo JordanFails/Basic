@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 
 public class AbilityGUICommand {
     @Command(
-            name = "abilitygui",
+            name = "items",
             inGameOnly = true,
-            usage = "Usage: /abilitygu"
+            usage = "Usage: /items"
     )
 
     public void execute(CommandArgs args){
