@@ -28,6 +28,9 @@ public class BukkitReflection {
     private static final Class CRAFT_ITEM_STACK_CLASS;
     private static final Method CRAFT_ITEM_STACK_AS_NMS_COPY_METHOD;
 
+    private static final Class SPIGOT_CONFIG_CLASS;
+    private static final Field SPIGOT_CONFIG_BUNGEE_FIELD;
+
     static {
         try {
             String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
@@ -54,6 +57,10 @@ public class BukkitReflection {
             CRAFT_ITEM_STACK_CLASS = Class.forName(CRAFT_BUKKIT_PACKAGE + "inventory.CraftItemStack");
             CRAFT_ITEM_STACK_AS_NMS_COPY_METHOD = CRAFT_ITEM_STACK_CLASS.getDeclaredMethod("asNMSCopy", ItemStack.class);
             CRAFT_ITEM_STACK_AS_NMS_COPY_METHOD.setAccessible(true);
+
+            SPIGOT_CONFIG_CLASS = Class.forName("org.spigotmc.SpigotConfig");
+            SPIGOT_CONFIG_BUNGEE_FIELD = SPIGOT_CONFIG_CLASS.getDeclaredField("bungee");
+            SPIGOT_CONFIG_BUNGEE_FIELD.setAccessible(true);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -85,6 +92,16 @@ public class BukkitReflection {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public static boolean isBungeeSever(){
+        try{
+            return (boolean) SPIGOT_CONFIG_BUNGEE_FIELD.get(null);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
     }
 

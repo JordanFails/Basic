@@ -21,16 +21,14 @@ public class FreeRankCommand {
     public void execute(CommandArgs args){
         Player player = args.getPlayer();
         if(!ConfigurationService.getFreeRankConfig().contains(player.getUniqueId().toString())) {
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setrank " + player.getName() + "toprank 7d global FreeRank");
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setrank " + player.getName() + "owner 7d global FreeRank");
             player.sendMessage(" ");
             player.sendMessage(CC.translate("&eYou have claimed your free &c&k;;&4TopRank&c&k;;&e Rank!"));
-            player.sendMessage(CC.translate("&eThank you for supporting &6Sample Frank&c " + "\u2764"));
+            player.sendMessage(CC.translate("&eThank you for supporting &6SampleFeatures&6&l " + "\u2764"));
             player.sendMessage(" ");
-            ConfigurationService.getFreeRankConfig().set(player.getUniqueId().toString(), true);
-            return;
+            ConfigurationService.getFreeRankConfig().set(player.getUniqueId().toString(), 1);
         }else if(ConfigurationService.getFreeRankConfig().contains(player.getUniqueId().toString())){
             player.sendMessage(CC.translate("&eYou have already claimed your free rank."));
-            return;
         }
     }
 }

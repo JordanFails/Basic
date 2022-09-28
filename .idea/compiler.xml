@@ -7,11 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="BungeeAlert" />
+        <module name="BungeeHub" />
         <module name="Basic" />
+        <module name="HubBasic" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="BungeeAlert" target="1.8" />
+      <module name="honcho2" target="1.8" />
       <module name="qLib" target="1.8" />
       <module name="qMobSuite" target="1.8" />
       <module name="qStaff" target="1.8" />

@@ -28,7 +28,7 @@ public class MuteChatCommand {
                 Bukkit.getConsoleSender().sendMessage(CC.translate("&a&n" + player.getName() + "&r has unmuted chat."));
                 Bukkit.getServer().broadcastMessage(CC.translate("&a&l(!)&a Global chat has been unmuted."));
                 player.sendMessage(CC.translate("&a&l(!)&a Chat has been successfully &r&nunmuted&a!"));
-            } else if (!chatManagement.isMuted()) {
+            } else {
                 chatManagement.setMuted(true);
                 Bukkit.getConsoleSender().sendMessage(CC.translate("&a&n" + player.getName() + "&r has muted chat."));
                 Bukkit.getServer().broadcastMessage(CC.translate("&a&l(!)&a Global chat has been muted."));

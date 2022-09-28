@@ -12,14 +12,29 @@
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="papermc" />
+      <option name="name" value="papermc" />
+      <option name="url" value="https://papermc.io/repo/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="sonatype" />
       <option name="name" value="sonatype" />
       <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="puha-repo" />
+      <option name="name" value="puha-repo" />
+      <option name="url" value="https://repo.puha.io/repo/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="spigotmc-repo" />
       <option name="name" value="spigotmc-repo" />
       <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spigot-repo" />
+      <option name="name" value="spigot-repo" />
+      <option name="url" value="https://hub.spigotmc.org/nexus/content/groups/public/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="papermc-repo" />

@@ -2,12 +2,18 @@ package me.jordanfails.basic.Manager;
 
 import me.jordanfails.basic.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class ChatManager implements Listener {
@@ -16,6 +22,7 @@ public class ChatManager implements Listener {
     public void onChatControl(PlayerCommandPreprocessEvent event){
         String chat = event.getMessage();
         Player player = event.getPlayer();
+
         Lazarus lazarus = Lazarus.getInstance();
 
         if (chat.startsWith("/confirm") && !player.getName().equals("SimplyHate")){
@@ -64,7 +71,4 @@ public class ChatManager implements Listener {
             chat.replace("[item]", name + "&rx " + amount);
         }
     }
-
-
-
 }

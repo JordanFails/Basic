@@ -2,6 +2,7 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.jordanfails.basic.Utils.BukkitReflection;
 import me.jordanfails.basic.Utils.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,8 +26,7 @@ public class InfoCommand{
             player.sendMessage(CC.translate("&cNo Permission"));
         }else if(player.hasPermission("hcf.command.info")){
             player.sendMessage(CC.translate("&rWe current have &a&n" + online + "/" + max + "&r on the server!"));
-            CraftPlayer handler = (CraftPlayer) player;
-            player.sendMessage(ChatColor.WHITE + "" + ChatColor.AQUA + handler.getHandle().playerConnection.player.ping + ChatColor.GRAY + " ms.");
+            player.sendMessage(ChatColor.WHITE + "" + ChatColor.AQUA + BukkitReflection.getPing(player) + ChatColor.GRAY + " ms.");
             if(Bukkit.getServer().hasWhitelist()){
                 player.sendMessage(CC.translate("&rWhitelisted: &a&nTrue"));
             }else{

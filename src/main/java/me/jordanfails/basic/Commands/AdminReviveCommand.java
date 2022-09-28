@@ -3,7 +3,7 @@ package me.jordanfails.basic.Commands;
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
 
-/*
+
 public class AdminReviveCommand {
 
     @Command(
@@ -13,4 +13,4 @@ public class AdminReviveCommand {
 
     public void execute(CommandArgs args) {
     }
-}*/
+}

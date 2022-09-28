@@ -12,7 +12,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../qLib/pom.xml" />
-        <option value="$PROJECT_DIR$/../BungeeAlert/pom.xml" />
+        <option value="$PROJECT_DIR$/../BungeeHub/pom.xml" />
+        <option value="$PROJECT_DIR$/../HubBasic/pom.xml" />
       </list>
     </option>
   </component>

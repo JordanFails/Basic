@@ -7,6 +7,7 @@ loadbefore:
   - Lazarus
 depend:
   - Lazarus
+  - TitleManager
   - LunarClient-API
 commands:
   checkdeathban:

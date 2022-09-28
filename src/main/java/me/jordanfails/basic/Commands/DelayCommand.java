@@ -2,6 +2,7 @@ package me.jordanfails.basic.Commands;
 
 import com.minnymin.command.Command;
 import com.minnymin.command.CommandArgs;
+import me.activated.core.plugin.AquaCore;
 import me.jordanfails.basic.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import org.bukkit.ChatColor;
@@ -18,7 +19,7 @@ public class DelayCommand {
         if(args.length() > 0){
             sender.sendMessage(ChatColor.RED + args.getCommand().getUsage());
         }else if(isInt(args.getArgs(0), sender)){
-            Lazarus.getInstance().getChatControlHandler().setDelay(chatDelay);
+            AquaCore.INSTANCE.getChatManagement().setDelay(chatDelay);
         }
 
     }

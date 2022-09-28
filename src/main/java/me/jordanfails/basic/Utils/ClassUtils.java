@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
 @UtilityClass
 public final class ClassUtils {
     /**
-     * Gets all the classes in a the provided package.
+     * Gets all the classes in a provided package.
      *
      * @param plugin      The plugin who owns the package
      * @param packageName The package to scan classes in.

@@ -31,6 +31,7 @@ public class RedeemManager implements Listener {
             if(event.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + ChatColor.BOLD.toString() + ChatColor.ITALIC.toString() + "SimplyHate")) {
                 if (!ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
                     Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + CC.White + " has redeemed for " + ChatColor.AQUA + ChatColor.BOLD.toString() + "SimplyHate" + ChatColor.WHITE + ".");
+                    ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), 1);
                     player.closeInventory();
                     ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), true);
                 } else if (ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
@@ -42,6 +43,7 @@ public class RedeemManager implements Listener {
             if(event.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Pampa")) {
                 if (!ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
                     Bukkit.getServer().broadcastMessage(ChatColor.DARK_RED + player.getName() + CC.White + " has redeemed for " + ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Pampa" + ChatColor.WHITE + ".");
+                    ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), 1);
                     player.closeInventory();
                     ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), true);
                 } else if (ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
@@ -53,6 +55,7 @@ public class RedeemManager implements Listener {
             if(event.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Goos")) {
                 if (!ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
                     Bukkit.getServer().broadcastMessage(ChatColor.DARK_RED + player.getName() + CC.White + " has redeemed for " + ChatColor.DARK_RED + ChatColor.BOLD.toString() + "Goos" + ChatColor.WHITE + ".");
+                    ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), 1);
                     player.closeInventory();
                     ConfigurationService.getPlayerConfig().set(player.getUniqueId().toString(), true);
                 } else if (ConfigurationService.getPlayerConfig().contains(player.getUniqueId().toString())) {
@@ -87,7 +90,7 @@ public class RedeemManager implements Listener {
                 Bukkit.getServer().broadcastMessage(CC.translate("&b&l" + player.getName() + "&r has claimed the &b&nFREE&r &b&nTOP&r &b&nRANK&r, and you can too!"));
                 Bukkit.getServer().broadcastMessage(CC.translate("&rUse the command &b&n/freerank&r to claim it!"));
                 player.closeInventory();
-                ConfigurationService.getFreeRankConfig().set(player.getUniqueId().toString(), true);
+                ConfigurationService.getFreeRankConfig().set(player.getUniqueId().toString(), 1);
             } else if (ConfigurationService.getFreeRankConfig().contains(player.getUniqueId().toString())) {
                 player.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "(!) " + ChatColor.RED + "You have already claimed your free rank!");
                 player.closeInventory();

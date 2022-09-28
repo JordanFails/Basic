@@ -6,36 +6,39 @@ import me.jordanfails.basic.Commands.*;
 import me.jordanfails.basic.Manager.*;
 import me.jordanfails.basic.PartnerPackage.Listener.Package;
 import me.jordanfails.basic.PartnerPackage.PartnerPackageCommand;
+import me.jordanfails.basic.Utils.CC;
 import me.jordanfails.basic.Utils.ConfigurationService;
 import me.jordanfails.basic.Utils.Cooldown;
 import me.jordanfails.basic.Utils.DateTimeFormats;
 import me.jordanfails.basic.Vouchers.VouchersCommand;
-import me.jordanfails.basic.Vouchers.listeners.ClearTimerPerk;
-import me.jordanfails.basic.Vouchers.listeners.CraftingPerk;
-import me.jordanfails.basic.Vouchers.listeners.FeedPerk;
-import me.jordanfails.basic.Vouchers.listeners.FlyPerk;
 import me.qiooip.lazarus.config.Config;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static java.util.Calendar.HOUR;
 import static java.util.Calendar.MINUTE;
 
 @Getter
 public final class Basic extends JavaPlugin {
-    private static Basic plugin;
+    private static Basic basic;
 
     private CommandFramework commandFramework;
     public static ArrayList<UUID> staff = new ArrayList<>();
@@ -52,13 +55,14 @@ public final class Basic extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
+        basic = this;
         this.commandFramework = new CommandFramework(this);
         long timeAtStart = System.currentTimeMillis();
         registerCommands();
         registerManagers();
         setupPermissions();
         setupChat();
+        autoDiscord();
         ConfigurationService.setup();
         ConfigurationService.save();
         getConfig().options().copyDefaults();
@@ -71,11 +75,6 @@ public final class Basic extends JavaPlugin {
         }
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[Basic]" + ChatColor.GREEN + " Plugin loaded in " + timeTakenInMS + "ms.");
-
-
-        BukkitScheduler scheduler = getServer().getScheduler();
-
-
     }
 
     private boolean setupChat() {
@@ -89,24 +88,18 @@ public final class Basic extends JavaPlugin {
         perms = rsp.getProvider();
         return perms != null;
     }
-
-    public static Permission getPermissions() {
-        return perms;
-    }
-
-    public static Chat getChat() {
-        return chat;
-    }
-
-
     public static Basic get() {
-        return plugin;
+        return basic;
+    }
+
+    public static Basic getInstance(){
+        return basic;
     }
 
 
     @Override
     public void onDisable() {
-        plugin = null;
+        basic = null;
     }
 
     private void registerCommands(){
@@ -154,6 +147,8 @@ public final class Basic extends JavaPlugin {
         this.commandFramework.registerCommands(new GrantStatusCommand());
         this.commandFramework.registerCommands(new SkullCommand());
         this.commandFramework.registerCommands(new CurrentRankCommand());
+        this.commandFramework.registerCommands(new ServerTimeCommand());
+        this.commandFramework.registerCommands(new VoteCommand());
     }
 
     private void registerManagers(){
@@ -179,6 +174,28 @@ public final class Basic extends JavaPlugin {
 
     public static String getRemaining(long millis, boolean milliseconds) {
         return getRemaining(millis, milliseconds, true);
+    }
+
+    public void autoDiscord(){
+        new BukkitRunnable(){
+
+            /**
+             * When an object implementing interface {@code Runnable} is used
+             * to create a thread, starting the thread causes the object's
+             * {@code run} method to be called in that separately executing
+             * thread.
+             * <p>
+             * The general contract of the method {@code run} is that it may
+             * take any action whatsoever.
+             *
+             * @see Thread#run()
+             */
+            @SuppressWarnings("deprecation")
+            @Override
+            public void run() {
+                Bukkit.getServer().broadcastMessage(CC.translate("&8[&4Alert&8]&r Our brand new &6&lSampleFeatures Discord&r!&r Join at &ediscord.gg/samplefeatures&r."));
+            }
+        }.runTaskTimerAsynchronously(this, 0, 20*TimeUnit.MINUTES.toSeconds(30));
     }
 
     public static String getRemaining(long duration, boolean milliseconds, boolean trail) {
