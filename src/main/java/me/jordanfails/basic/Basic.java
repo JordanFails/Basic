@@ -142,13 +142,13 @@ public final class Basic extends JavaPlugin {
         this.commandFramework.registerCommands(new SetSlotsCommand());
         this.commandFramework.registerCommands(new PunishmentWipeCommand());
         this.commandFramework.registerCommands(new FakeBanCommand());
-        this.commandFramework.registerCommands(new WhoisCommand());
         this.commandFramework.registerCommands(new RandomTeleportCommand());
         this.commandFramework.registerCommands(new GrantStatusCommand());
         this.commandFramework.registerCommands(new SkullCommand());
         this.commandFramework.registerCommands(new CurrentRankCommand());
         this.commandFramework.registerCommands(new ServerTimeCommand());
         this.commandFramework.registerCommands(new VoteCommand());
+        this.commandFramework.registerCommands(new WhoIsCommand());
     }
 
     private void registerManagers(){
