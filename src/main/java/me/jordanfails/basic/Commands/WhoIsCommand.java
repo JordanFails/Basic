@@ -8,6 +8,7 @@ import me.jordanfails.basic.Utils.*;
 import me.qiooip.lazarus.Lazarus;
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.time.DurationFormatUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -29,15 +30,14 @@ public class WhoIsCommand{
             return;
         }
 
-        Player target = BukkitUtils.playerWithNameOrUUID(args.getArgs(0));
-        if(!canSee(sender, target)) {
+        Player target = Bukkit.getPlayer(args.getArgs(0));
+        if(target == null || !canSee(sender, target)){
             sender.sendMessage(String.format(BaseConstants.PLAYER_WITH_NAME_OR_UUID_NOT_FOUND, args.getArgs(0)));
             return;
         }
 
         Location location = target.getLocation();
         World world = location.getWorld();
-        Player player = Lazarus.getInstance().getUserdataManager().getUserdata(target.getUniqueId()).getPlayer();
         boolean isVanished = AquaCoreAPI.INSTANCE.getPlayerData(target.getUniqueId()).isVanished();
         boolean isStaffChatAlerts = AquaCoreAPI.INSTANCE.getGlobalPlayer(target.getUniqueId()).isStaffChatAlerts();
         boolean isInStaffMode = AquaCoreAPI.INSTANCE.getPlayerData(target.getUniqueId()).isInStaffMode();
@@ -52,7 +52,7 @@ public class WhoIsCommand{
         sender.sendMessage(ChatColor.YELLOW + "  Vanished: " + ChatColor.AQUA + isVanished + " (priority=" + StaffPriority.of(target).getPriorityLevel() + ')');
         sender.sendMessage(ChatColor.YELLOW + "  Staff Chat: " + ChatColor.AQUA + isStaffChatAlerts);
         sender.sendMessage(ChatColor.YELLOW + "  Operator: " + ChatColor.AQUA + target.isOp());
-        sender.sendMessage(ChatColor.YELLOW + "  * Permission: " + (AquaCore.INSTANCE.getPlayerManagement().getPlayerData(target.getUniqueId()).hasPermission("*") ? new StringBuilder().append((Object)ChatColor.AQUA).append("true").toString() : new StringBuilder().append((Object)ChatColor.AQUA).append("false").toString()));
+        sender.sendMessage(ChatColor.YELLOW + "  Permission: " + (AquaCore.INSTANCE.getPlayerManagement().getPlayerData(target.getUniqueId()).hasPermission("*") ? new StringBuilder().append((Object)ChatColor.AQUA).append("true").toString() : new StringBuilder().append((Object)ChatColor.AQUA).append("false").toString()));
         sender.sendMessage(ChatColor.YELLOW + "  Staff Mode: " + ChatColor.AQUA + isInStaffMode);
         sender.sendMessage(ChatColor.YELLOW + "  GameMode: " + ChatColor.AQUA + WordUtils.capitalizeFully((String)target.getGameMode().name().replace('_', ' ')));
         sender.sendMessage(ChatColor.YELLOW + "  Idle Time: " + ChatColor.AQUA + DurationFormatUtils.formatDurationWords((long)BukkitUtils.getIdleTime(target), (boolean)true, (boolean)true));
@@ -60,7 +60,7 @@ public class WhoIsCommand{
         if (Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes() != null) {
             if (!Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().isEmpty()) {
                 if (Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().size() > 1) {
-                    new Text((Object)ChatColor.YELLOW + "  Note: " + (Object)ChatColor.AQUA + Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().get(0) + (Object)ChatColor.GRAY + " [Click for more notes]").setHoverText((Object)ChatColor.AQUA + "Click me to view " + target.getName() + "'s " + Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().size() + " more notes.").setClick(ClickAction.RUN_COMMAND, "/note check " + target.getName()).send(sender);
+                    new Text((Object)ChatColor.YELLOW + "  Note: " + (Object)ChatColor.AQUA + Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().get(0) + (Object)ChatColor.GRAY + " [Click for more notes]").setHoverText((Object)ChatColor.AQUA + "Click me to view " + target.getName() + "'s " + Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().size() + " more notes.").setClick(ClickAction.RUN_COMMAND, "/notes check " + target.getName()).send(sender);
                 } else {
                     sender.sendMessage((Object)ChatColor.YELLOW + "  Notes: " + (Object)ChatColor.AQUA + Lazarus.getInstance().getUserdataManager().getUserdata(target).getNotes().get(0));
                 }

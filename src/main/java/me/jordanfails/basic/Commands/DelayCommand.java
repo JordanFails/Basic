@@ -6,7 +6,10 @@ import me.activated.core.plugin.AquaCore;
 import me.jordanfails.basic.Utils.CC;
 import me.qiooip.lazarus.Lazarus;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import static me.jordanfails.basic.Basic.ERROR;
 
 public class DelayCommand {
     @Command(

@@ -6,13 +6,13 @@ import me.jordanfails.basic.Inventories.Inventories;
 import org.bukkit.entity.Player;
 
 
-public class PartnerCommand {
+public class TwitchCommand {
     @Command(
-            name = "partner",
+            name = "twitch",
             inGameOnly = true
     )
     public void execute(CommandArgs args) {
         Player player = args.getPlayer();
-        Inventories.partnerGUI(player);
+        Inventories.streamerGUI(player);
     }
 }

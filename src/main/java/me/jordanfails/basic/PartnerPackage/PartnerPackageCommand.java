@@ -51,7 +51,7 @@ public class PartnerPackageCommand {
                     return;
                 }
             }catch (NumberFormatException e){
-
+                e.printStackTrace();
             }
 
         }

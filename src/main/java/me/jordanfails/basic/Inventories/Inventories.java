@@ -1,6 +1,7 @@
 package me.jordanfails.basic.Inventories;
 
 import me.activated.core.api.rank.RankData;
+import me.activated.core.plugin.AquaCore;
 import me.activated.core.plugin.AquaCoreAPI;
 import me.jordanfails.basic.Basic;
 import me.jordanfails.basic.Utils.CC;
@@ -374,10 +375,25 @@ public class Inventories {
     public static void youtubeGUI(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8YouTube Requirements"));
 
-        inventory.setItem(4, new ItemBuilder(Material.REDSTONE_TORCH_ON).displayName(CC.translate("&c&lYouTube Requirements")).lore(CC.translate("&c&l»&r Sub Requirements:&r 200"), CC.translate("&c&l»&r View Requirements:&r 100"), " ", CC.translate("&aMessage a staff member to apply.")).enchant(Enchantment.SILK_TOUCH, 10, true).build());
+        inventory.setItem(4, new ItemBuilder(Material.INK_SACK).data(DyeColor.ORANGE.getData()).displayName(CC.translate("&c&lYouTube Requirements")).lore(CC.translate("&c&l»&r Sub Requirements:&r 200"), CC.translate("&c&l»&r View Requirements:&r 100"), " ", CC.translate("&aMessage a staff member to apply.")).enchant(Enchantment.SILK_TOUCH, 10, true).build());
 
         player.openInventory(inventory);
     }
+    public static void partnerGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8Partner Requirements"));
+
+        inventory.setItem(4, new ItemBuilder(Material.INK_SACK).data(DyeColor.BROWN.getData()).displayName(CC.translate("&b&lPartner Requirements")).lore(CC.translate("&b&l»&r Sub Requirements:&r 500"), CC.translate("&b&l»&r View Requirements:&r 250"), " ", CC.translate("&aMessage a staff member to apply.")).enchant(Enchantment.SILK_TOUCH, 10, true).build());
+
+        player.openInventory(inventory);
+    }
+    public static void streamerGUI(Player player){
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8Streamer Requirements"));
+
+        inventory.setItem(4, new ItemBuilder(Material.INK_SACK).data(DyeColor.LIME.getData()).displayName(CC.translate("&5&lTwitch Requirements")).lore(CC.translate("&5&l»&r Sub Requirements:&r 1000"), CC.translate("&5&l»&r View Requirements:&r 500"), " ", CC.translate("&aMessage a staff member to apply.")).enchant(Enchantment.SILK_TOUCH, 10, true).build());
+
+        player.openInventory(inventory);
+    }
+
 
     public static void pronouns(Player player){
         Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&8Select a Pronoun"));
@@ -388,6 +404,23 @@ public class Inventories {
 
         player.openInventory(inventory);
 
+    }
+
+    public static void playerStatsGUI(Player player, Player target){
+        String name = player.getName();
+        Inventory inventory = Bukkit.getServer().createInventory(null, 9, CC.translate("&7" + target.getName() + "'s stats"));
+        inventory.setItem(4, new ItemBuilder(Material.WATCH, 1).displayName(CC.translate("&6&l" + name + "'s Stats")).lore(CC.translate("&7Player stats for the current map of HCF"),
+                " ",
+                CC.translate("&6Balance" ),
+                CC.translate("&2$&a" + Lazarus.getInstance().getUserdataManager().getUserdata(target.getUniqueId()).getBalance()),
+                " ",
+                CC.translate("&6&lKills"),
+                CC.translate("&f" + Lazarus.getInstance().getUserdataManager().getUserdata(target).getKills()),
+                " ",
+                CC.translate("&6&lDeaths"),
+                CC.translate("&f" + Lazarus.getInstance().getUserdataManager().getUserdata(target).getDeaths())).enchant(Enchantment.DURABILITY, 10, true).build());
+
+        player.openInventory(inventory);
     }
 
 

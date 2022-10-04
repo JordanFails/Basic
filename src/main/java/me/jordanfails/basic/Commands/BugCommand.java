@@ -11,6 +11,6 @@ public class BugCommand {
     )
 
     public void execute(CommandArgs args){
-        Player playe = args.getPlayer();
+        Player player = args.getPlayer();
     }
 }

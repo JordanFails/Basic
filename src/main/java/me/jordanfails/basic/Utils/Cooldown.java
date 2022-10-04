@@ -22,7 +22,7 @@ public class Cooldown {
 
     public static void addCooldown(String k, Player p, int seconds) {
         if (!cooldown.containsKey(k)) {
-            throw new IllegalArgumentException(k + " does not exist");
+            throw new IllegalArgumentException(k + " does not exist!");
         }
         long next = System.currentTimeMillis() + seconds * 1000L;
         ((HashMap<UUID, Long>) cooldown.get(k)).put(p.getUniqueId(), Long.valueOf(next));
@@ -43,4 +43,5 @@ public class Cooldown {
     }
 
     private static HashMap<String, HashMap<UUID, Long>> cooldown = new HashMap<String, HashMap<UUID, Long>>();
+
 }

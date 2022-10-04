@@ -7,14 +7,12 @@ loadbefore:
   - Lazarus
 depend:
   - Lazarus
-  - TitleManager
   - LunarClient-API
 commands:
   checkdeathban:
     description: a neat command to check your deathban status
-  checkrank:
-    description: check your current highest rank with check rank
-  finfo:
-    description: a cool command to check the information on a faction.
-  fpunish:
-    description: a cool command to punish a whole faction.
+  srank:
+  lettingin:
+  strike:
+  arevive:
+  runningin:

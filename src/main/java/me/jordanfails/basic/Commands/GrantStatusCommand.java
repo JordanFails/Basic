@@ -30,6 +30,10 @@ public class GrantStatusCommand {
 
 
         player.sendMessage(CC.translate(RANKPREFIX + "&rYour currently rank is " + rankColor + rankName + "&r."));
+        if(grant.getNiceExpire().equals("null")){
+            player.sendMessage(CC.translate(RANKPREFIX + "&rYour current rank will not expire!"));
+            return;
+        }
         player.sendMessage(CC.translate(RANKPREFIX + "&rYour current rank will expire in: &a" + grant.getNiceExpire() + "&r."));
 
     }

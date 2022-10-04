@@ -93,6 +93,10 @@ public class CC {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
+    public static String bungeeTranslate(String string){
+        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', string);
+    }
+
     public static String strip(String string) {
         return ChatColor.stripColor(string);
     }

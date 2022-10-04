@@ -1,23 +1,32 @@
 package me.jordanfails.basic;
 
+import LorexMC.us.utils.internal.com.bruce.base.BasePlugin;
 import com.minnymin.command.CommandFramework;
 import lombok.Getter;
 import me.jordanfails.basic.Commands.*;
 import me.jordanfails.basic.Manager.*;
 import me.jordanfails.basic.PartnerPackage.Listener.Package;
 import me.jordanfails.basic.PartnerPackage.PartnerPackageCommand;
+import me.jordanfails.basic.Rank.RankCommand;
+import me.jordanfails.basic.Rank.RankExecutor;
+import me.jordanfails.basic.Strikes.StrikeExecutor;
 import me.jordanfails.basic.Utils.CC;
 import me.jordanfails.basic.Utils.ConfigurationService;
 import me.jordanfails.basic.Utils.Cooldown;
 import me.jordanfails.basic.Utils.DateTimeFormats;
 import me.jordanfails.basic.Vouchers.VouchersCommand;
 import me.qiooip.lazarus.config.Config;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.apache.commons.lang.time.DurationFormatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,17 +61,30 @@ public final class Basic extends JavaPlugin {
     public static final String PREFIXNOPERMS;
     public static final String NOPERMS;
     public static final String RANKPREFIX;
+    public static final String PLAYERONLY;
+    public static final String ERROR;
+    public static final String SUCCESS;
+    public static final String TOOMANYARGS;
 
+    public static final String TOOLITTLEARGS;
+
+    public static final String INFO;
     @Override
     public void onEnable() {
         basic = this;
-        this.commandFramework = new CommandFramework(this);
         long timeAtStart = System.currentTimeMillis();
-        registerCommands();
         registerManagers();
         setupPermissions();
+        getCommand("srank").setExecutor(new RankExecutor(this));
+        getCommand("lettingin").setExecutor(new LettingInCommand());
+        getCommand("strike").setExecutor(new StrikeExecutor(this));
+        getCommand("arevive").setExecutor(new AdminReviveCommand());
+        getCommand("runningin").setExecutor(new RunningInCommand());
+        this.commandFramework = new CommandFramework(this);
         setupChat();
         autoDiscord();
+        autoTip1();
+        Plugin aquacore = getServer().getPluginManager().getPlugin("AquaCore");
         ConfigurationService.setup();
         ConfigurationService.save();
         getConfig().options().copyDefaults();
@@ -70,7 +92,12 @@ public final class Basic extends JavaPlugin {
         long timeAtEnd = System.currentTimeMillis();
         long timeTakenInMS = timeAtEnd - timeAtStart;
         Cooldown.createCooldown("lff_cooldown");
-        if(!getDescription().getName().equals("Basic") && getDescription().getAuthors().equals("JordanFails")){
+        Cooldown.createCooldown("youtube_cooldown");
+        Cooldown.createCooldown("partner_cooldown");
+        Cooldown.createCooldown("twitch_cooldown");
+        Cooldown.createCooldown("lettingin_cooldown");
+        Cooldown.createCooldown("runningin_command");
+        if(!getDescription().getName().equals("Basic") && getDescription().getAuthors().toString().equals("JordanFails")){
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -149,6 +176,10 @@ public final class Basic extends JavaPlugin {
         this.commandFramework.registerCommands(new ServerTimeCommand());
         this.commandFramework.registerCommands(new VoteCommand());
         this.commandFramework.registerCommands(new WhoIsCommand());
+        this.commandFramework.registerCommands(new PingCommand());
+        this.commandFramework.registerCommands(new TwitchCommand());
+        this.commandFramework.registerCommands(new PartnerCommand());
+
     }
 
     private void registerManagers(){
@@ -198,6 +229,32 @@ public final class Basic extends JavaPlugin {
         }.runTaskTimerAsynchronously(this, 0, 20*TimeUnit.MINUTES.toSeconds(30));
     }
 
+    public void autoTip1(){
+        new BukkitRunnable() {
+            /**
+             * When an object implementing interface {@code Runnable} is used
+             * to create a thread, starting the thread causes the object's
+             * {@code run} method to be called in that separately executing
+             * thread.
+             * <p>
+             * The general contract of the method {@code run} is that it may
+             * take any action whatsoever.
+             *
+             * @see Thread#run()
+             */
+            @Override
+            public void run() {
+                TextComponent message = new TextComponent(CC.translate("&6&l[TIP] &8» &e SOTW on Squads takes place every Saturday at &a55PM EST&e. &a[Hover]"));
+                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Join out discord to learn more.").color(net.md_5.bungee.api.ChatColor.WHITE).create()));
+                message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/discord"));
+
+                for(Player player : Bukkit.getOnlinePlayers()){
+                    player.spigot().sendMessage(message);
+                }
+            }
+        }.runTaskTimerAsynchronously(this, 0, 20*TimeUnit.MINUTES.toSeconds(60));
+    }
+
     public static String getRemaining(long duration, boolean milliseconds, boolean trail) {
         if ((milliseconds) && (duration < MINUTE)) {
             return ((DecimalFormat) (trail ? DateTimeFormats.REMAINING_SECONDS_TRAILING
@@ -207,11 +264,18 @@ public final class Basic extends JavaPlugin {
     }
 
     static{
-        PREFIX = ChatColor.GOLD + ChatColor.BOLD.toString() + "Sample §7» " + ChatColor.WHITE;
+        PREFIX = ChatColor.GOLD + ChatColor.BOLD.toString() + "Basic §7» " + ChatColor.WHITE;
         RANKPREFIX = ChatColor.GOLD + ChatColor.BOLD.toString() + "Rank §7» " + ChatColor.WHITE;
-        NOPLAYER = ChatColor.RED + "You must be a player to use this command. ";
-        PREFIXNOPERMS = ChatColor.RED + "You lack the sufficient permissions to use this prefix. ";
-        NOPERMS = ChatColor.RED + "You lack the sufficient permissions to execute this command. ";
+        ERROR = CC.translate("&6&lBasic §7»&c Error&7 |&c ");
+        SUCCESS = CC.translate("&6&lBasic §7»&a Success&7 |&a ");
+        INFO = CC.translate("&6&lBasic §7»&e Info&7 |&e ");
+        TOOMANYARGS = CC.translate("&6&lBasic §7»&c Error&7 |&cYou've added too many arguments!");
+        NOPLAYER = CC.translate("&6&lBasic §7»&c Error&7 |&c We're having trouble finding this player in our database!");
+        PREFIXNOPERMS = ChatColor.RED + "&6&lBasic §7»&c Error&7 |&You lack the sufficient permissions to use this prefix.";
+        NOPERMS = CC.translate("&6&lBasic §7»&c Error&7 |&cYou lack the permissions to execute this command.");
+        PLAYERONLY = CC.translate("&6&lBasic §7»&c Error&7 |&cThis command is for players only!");
+        TOOLITTLEARGS = CC.translate("&6&lBasic §7»&c Error&7 |&cYou've added too little arguments!");
+
     }
 
 }
